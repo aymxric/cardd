@@ -1,0 +1,203 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suly</title>
+
+  <!-- Fonts Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet" />
+
+  <!-- Tes CSS -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="mobile.css">
+
+
+  <link rel="icon" href="images/logo_suly.png" type="image/png" />
+
+  <!-- Scripts Firebase (version compat pour ton code) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+  <div id="loader">
+    <img src="https://www.sulyclothing.com/cdn/shop/files/3dgifmaker28792.gif?v=1724799956" alt="Chargement..." />
+  </div>
+
+  <header>
+    <div class="logo">
+      <img src="images/logo_suly.png" alt="Logo Sully" style="height: 40px;" />
+    </div>
+    <nav>
+      <ul class="main-nav">
+        <li class="dropdown">
+          <a href="shop.html">Shop
+            <svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" width="10" height="7" style="margin-left: 5px; vertical-align: middle; transform: rotate(180deg); fill: currentColor;">
+              <polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon>
+            </svg>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="teeshirt.html">T-Shirts</a></li>
+            <li><a href="sweat.html">Sweat</a></li>
+            <li><a href="pantalons.html">Pantalons</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Lookbook</a></li>
+        <li><a href="#">Nouveautés</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+  <a href="login.html" class="auth-link">Se connecter</a>
+  <a href="signup.html" class="auth-link">S'inscrire</a>
+</div>
+  </header>
+
+  <section class="hero">
+    <img class="graffiti-title" src="images/grafiti.png" alt="Welcome Graffiti" />
+  </section>
+
+  <section class="auth-section">
+    <button id="close-auth" title="Fermer">&times;</button>
+    <div id="user-info"></div>
+    <button id="logout-btn" style="display:none;">Déconnexion</button>
+
+    <p id="message"></p>
+
+    <form id="signup-form" style="display:none;">
+      <h2>Créer un compte</h2>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Mot de passe" required />
+      <button type="submit">S'inscrire</button>
+    </form>
+
+    <form id="login-form" style="display:none;">
+      <h2>Connexion</h2>
+      <input type="email" id="login-email" placeholder="Email" required />
+      <input type="password" id="login-password" placeholder="Mot de passe" required />
+      <button type="submit">Se connecter</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Suly — Tous droits réservés</p>
+    <p>
+      <a href="https://www.instagram.com/suly.clo" target="_blank" rel="noopener noreferrer">Instagram</a> |
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a> |
+      <a href="mailto:contact@sully.fr">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader.style.display = "none";
+      }, 2500);
+    });
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3Lu02nQvQurAU0aBkhv9vQ239xs9xyH0",
+      authDomain: "suly-a48f2.firebaseapp.com",
+      projectId: "suly-a48f2",
+      storageBucket: "suly-a48f2.appspot.com",
+      messagingSenderId: "747436486919",
+      appId: "1:747436486919:web:15993be447249965aa95a2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const signupForm = document.getElementById('signup-form');
+    const loginForm = document.getElementById('login-form');
+    const message = document.getElementById('message');
+    const userInfo = document.getElementById('user-info');
+    const logoutBtn = document.getElementById('logout-btn');
+    const authSection = document.querySelector('.auth-section');
+    const btnLogin = document.getElementById('btn-login');
+    const btnSignup = document.getElementById('btn-signup');
+    const closeAuthBtn = document.getElementById('close-auth');
+
+    btnLogin.addEventListener('click', () => {
+      authSection.style.display = 'block';
+      loginForm.style.display = 'flex';
+      signupForm.style.display = 'none';
+      message.textContent = '';
+      document.getElementById('login-email').focus();
+    });
+
+    btnSignup.addEventListener('click', () => {
+      authSection.style.display = 'block';
+      signupForm.style.display = 'flex';
+      loginForm.style.display = 'none';
+      message.textContent = '';
+      document.getElementById('email').focus();
+    });
+
+    closeAuthBtn.addEventListener('click', () => {
+      authSection.style.display = 'none';
+      message.textContent = '';
+    });
+
+    signupForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          message.style.color = 'green';
+          message.textContent = "Compte créé avec succès !";
+          signupForm.reset();
+        })
+        .catch(error => {
+          message.style.color = 'red';
+          message.textContent = "Erreur : " + error.message;
+        });
+    });
+
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          message.style.color = 'green';
+          message.textContent = "Connecté avec succès !";
+          loginForm.reset();
+        })
+        .catch(error => {
+          message.style.color = 'red';
+          message.textContent = "Erreur : " + error.message;
+        });
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      auth.signOut().then(() => {
+        message.style.color = 'green';
+        message.textContent = "Déconnecté.";
+      });
+    });
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        userInfo.textContent = `Connecté en tant que : ${user.email}`;
+        logoutBtn.style.display = 'block';
+        authSection.style.display = 'none';
+        message.textContent = '';
+      } else {
+        userInfo.textContent = '';
+        logoutBtn.style.display = 'none';
+        authSection.style.display = 'none';
+      }
+    });
+  </script>
+ 
+</body>
+</html>

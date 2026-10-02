@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Révisions Terminale — Maths, Physique & Philo · Bac 2026</title>
+<style>
+:root {
+  --ink:       #0f0f11;
+  --ink2:      #3a3a46;
+  --ink3:      #7a7a8e;
+  --paper:     #fafaf8;
+  --surface:   #ffffff;
+  --rule:      #e8e8ee;
+
+  --math-h:    #1e3a5f;
+  --math-a:    #2563eb;
+  --math-bg:   #eff5ff;
+
+  --phys-h:    #1f3a2e;
+  --phys-a:    #16a34a;
+  --phys-bg:   #f0faf3;
+
+  --philo-h:   #3b1f5e;
+  --philo-a:   #7c3aed;
+  --philo-bg:  #f5f0ff;
+
+  --ok-bg:     #d1fae5; --ok-txt: #065f46;
+  --ko-bg:     #fee2e2; --ko-txt: #991b1b;
+
+  --r: 12px; --r-sm: 7px;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100dvh;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── TOP BAR ─────────────────────────────────────────── */
+.topbar {
+  background: var(--ink);
+  color: #fff;
+  padding: .9rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.topbar-title { font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.prog-pill {
+  background: rgba(255,255,255,.15);
+  border-radius: 30px;
+  padding: 3px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* ── HOME ────────────────────────────────────────────── */
+.home { padding: 1.5rem 1.25rem; }
+
+.hero-strip {
+  background: var(--ink);
+  border-radius: var(--r);
+  padding: 1.75rem 1.5rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(255,255,255,.03) 30px,rgba(255,255,255,.03) 31px);
+}
+.hero-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .5; margin-bottom: .5rem; }
+.hero-h { font-size: 26px; font-weight: 800; line-height: 1.15; margin-bottom: .5rem; }
+.hero-p { font-size: 13px; opacity: .65; line-height: 1.6; }
+.hero-stats { display: flex; gap: 1.5rem; margin-top: 1.25rem; flex-wrap: wrap; }
+.stat-item .val { font-size: 22px; font-weight: 800; }
+.stat-item .lbl { font-size: 11px; opacity: .55; }
+
+.subject-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .875rem; margin-bottom: 1.5rem; }
+.subject-card {
+  border-radius: var(--r);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  border: 1.5px solid transparent;
+}
+.subject-card:active { transform: scale(.97); }
+.subject-card.math  { background: var(--math-bg);  border-color: #c7d9f8; }
+.subject-card.phys  { background: var(--phys-bg);  border-color: #b3dfc2; }
+.subject-card.philo { background: var(--philo-bg); border-color: #d4b8fc; }
+.sc-icon { font-size: 28px; margin-bottom: .625rem; display: block; }
+.sc-name { font-size: 14px; font-weight: 700; margin-bottom: .2rem; }
+.sc-name.math  { color: var(--math-h); }
+.sc-name.phys  { color: var(--phys-h); }
+.sc-name.philo { color: var(--philo-h); }
+.sc-sub { font-size: 12px; color: var(--ink3); }
+.sc-count { font-size: 11px; font-weight: 700; margin-top: .625rem; padding: 2px 7px; border-radius: 20px; display: inline-block; }
+.sc-count.math  { background: var(--math-bg);  color: var(--math-a);  border: 1px solid #93b8f5; }
+.sc-count.phys  { background: var(--phys-bg);  color: var(--phys-a);  border: 1px solid #86c99d; }
+.sc-count.philo { background: var(--philo-bg); color: var(--philo-a); border: 1px solid #c09df5; }
+
+.section-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink3);
+  margin-bottom: .75rem;
+}
+
+.quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.quick-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.quick-card:hover { border-color: var(--ink3); }
+.qc-label { font-size: 13px; font-weight: 600; margin-bottom: .2rem; }
+.qc-sub { font-size: 12px; color: var(--ink3); }
+.qc-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-top: .5rem; display: inline-block; }
+.badge-math  { background: var(--math-bg);  color: var(--math-a); }
+.badge-phys  { background: var(--phys-bg);  color: var(--phys-a); }
+.badge-philo { background: var(--philo-bg); color: var(--philo-a); }
+
+/* ── SUBJECT PAGE ────────────────────────────────────── */
+.subject-page { display: none; }
+.subject-page.active { display: block; }
+
+.sp-header {
+  padding: 1.5rem 1.25rem 0;
+  display: flex; align-items: center; gap: .75rem;
+  margin-bottom: 1rem;
+}
+.back-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 18px; flex-shrink: 0;
+  transition: background .15s;
+}
+.back-btn:hover { background: var(--paper); }
+.sp-header-text h2 { font-size: 18px; font-weight: 800; }
+.sp-header-text p  { font-size: 12px; color: var(--ink3); }
+
+.sp-tabs {
+  display: flex;
+  border-bottom: 1.5px solid var(--rule);
+  padding: 0 1.25rem;
+  gap: 0;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+}
+.sp-tab {
+  padding: .625rem 1rem;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  color: var(--ink3);
+  background: none;
+  border-top: none; border-left: none; border-right: none;
+  font-family: var(--font);
+  transition: color .15s;
+  margin-bottom: -1.5px;
+  white-space: nowrap;
+}
+.sp-tab.active.math  { color: var(--math-a);  border-bottom-color: var(--math-a); }
+.sp-tab.active.phys  { color: var(--phys-a);  border-bottom-color: var(--phys-a); }
+.sp-tab.active.philo { color: var(--philo-a); border-bottom-color: var(--philo-a); }
+.sp-tab:not(.active):hover { color: var(--ink2); }
+
+.sp-content { padding: 0 1.25rem 2rem; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── FICHES ──────────────────────────────────────────── */
+.fiche {
+  border-radius: var(--r);
+  border: 1.5px solid var(--rule);
+  background: var(--surface);
+  margin-bottom: .75rem;
+  overflow: hidden;
+}
+.fiche-header {
+  padding: .875rem 1rem;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  user-select: none;
+  transition: background .1s;
+}
+.fiche-header:hover { background: var(--paper); }
+.fiche-header .chev { font-size: 12px; color: var(--ink3); transition: transform .2s; }
+.fiche.open .fiche-header .chev { transform: rotate(180deg); }
+.fiche-body {
+  display: none;
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--rule);
+}
+.fiche.open .fiche-body { display: block; }
+.fiche-body p { font-size: 13px; color: var(--ink2); line-height: 1.7; margin-top: .75rem; }
+.fiche-body ul { padding-left: 1.1rem; margin-top: .4rem; }
+.fiche-body li { font-size: 13px; color: var(--ink2); line-height: 1.7; margin-bottom: .2rem; }
+.fiche-body strong { color: var(--ink); }
+.formula {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  padding: .5rem .875rem;
+  border-radius: var(--r-sm);
+  margin: .5rem 0;
+  line-height: 1.5;
+}
+.formula.math  { background: var(--math-bg);  border-left: 3px solid var(--math-a);  color: var(--math-h); }
+.formula.phys  { background: var(--phys-bg);  border-left: 3px solid var(--phys-a);  color: var(--phys-h); }
+.formula.philo { background: var(--philo-bg); border-left: 3px solid var(--philo-a); color: var(--philo-h); font-family: var(--font); font-style: italic; }
+
+/* ── QCM ─────────────────────────────────────────────── */
+.qcm-toolbar {
+  display: flex; align-items: center; gap: .625rem;
+  margin-bottom: 1rem; flex-wrap: wrap;
+}
+.qcm-toolbar label { font-size: 13px; color: var(--ink3); }
+.qcm-toolbar select {
+  padding: 6px 10px;
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font); font-size: 13px;
+  cursor: pointer;
+}
+.btn {
+  padding: 7px 16px;
+  border-radius: var(--r-sm);
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  cursor: pointer; border: 1.5px solid transparent;
+  transition: opacity .15s, transform .1s;
+}
+.btn:active { transform: scale(.97); }
+.btn-math  { background: var(--math-a);  color: #fff; border-color: var(--math-a); }
+.btn-phys  { background: var(--phys-a);  color: #fff; border-color: var(--phys-a); }
+.btn-philo { background: var(--philo-a); color: #fff; border-color: var(--philo-a); }
+
+.score-strip {
+  border-radius: var(--r);
+  padding: .875rem 1rem;
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 1rem;
+  display: none;
+}
+.score-strip.math  { background: var(--math-bg); }
+.score-strip.phys  { background: var(--phys-bg); }
+.score-strip.philo { background: var(--philo-bg); }
+.score-big { font-size: 28px; font-weight: 800; }
+.score-big.math  { color: var(--math-a); }
+.score-big.phys  { color: var(--phys-a); }
+.score-big.philo { color: var(--philo-a); }
+.score-info { font-size: 13px; color: var(--ink2); }
+.score-info span { font-weight: 700; }
+
+.qitem {
+  background: var(--surface);
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r);
+  padding: 1.1rem;
+  margin-bottom: .75rem;
+}
+.qitem-q { font-size: 14px; font-weight: 600; line-height: 1.5; margin-bottom: .875rem; }
+.qnum { font-weight: 400; color: var(--ink3); margin-right: .3rem; }
+.opts { display: flex; flex-direction: column; gap: 6px; }
+.opt {
+  padding: .6rem .875rem;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font); font-size: 13px;
+  text-align: left; cursor: pointer;
+  transition: border-color .12s, background .12s;
+}
+.opt:hover:not(:disabled) { border-color: var(--ink3); background: var(--paper); }
+.opt:disabled { cursor: default; }
+.opt.correct { background: var(--ok-bg); border-color: #34d399; color: var(--ok-txt); font-weight: 600; }
+.opt.wrong   { background: var(--ko-bg); border-color: #f87171; color: var(--ko-txt); }
+.fb {
+  font-size: 12px; line-height: 1.55;
+  border-radius: var(--r-sm);
+  padding: .5rem .75rem;
+  margin-top: .625rem;
+  display: none;
+}
+.fb.ok { background: var(--ok-bg); color: var(--ok-txt); }
+.fb.ko { background: var(--ko-bg); color: var(--ko-txt); }
+
+.formula-grid { display: grid; gap: .5rem; }
+
+/* PHILO-SPECIFIQUE */
+.notionTag {
+  display: inline-block;
+  background: var(--philo-bg);
+  color: var(--philo-a);
+  border: 1px solid #c09df5;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  margin: 2px;
+}
+.auteur-chip {
+  display: inline-block;
+  background: #f3f0fa;
+  border: 1px solid #d4b8fc;
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  padding: 3px 8px;
+  margin: 3px 2px;
+  color: var(--philo-h);
+}
+.methode-box {
+  background: var(--philo-bg);
+  border: 1.5px solid #d4b8fc;
+  border-radius: var(--r);
+  padding: 1rem;
+  margin: .75rem 0;
+}
+.methode-box h4 { font-size: 13px; font-weight: 700; color: var(--philo-h); margin-bottom: .5rem; }
+.methode-box ol { padding-left: 1.2rem; }
+.methode-box li { font-size: 13px; color: var(--ink2); line-height: 1.7; }
+
+@media (max-width: 380px) {
+  .subject-cards { grid-template-columns: 1fr; }
+  .quick-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-title">📚 Terminale — Bac 2026</div>
+  <div class="prog-pill" id="topbar-prog">0 réponses</div>
+</div>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="page-home" class="home">
+
+  <div class="hero-strip">
+    <div class="hero-eyebrow">Baccalauréat Général 2026</div>
+    <div class="hero-h">Maths · Physique<br>&amp; Philosophie</div>
+    <div class="hero-p">Fiches de cours, formulaires et QCM aléatoires — programme officiel Bac 2026.</div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="val" id="stat-q">360+</div><div class="lbl">questions</div></div>
+      <div class="stat-item"><div class="val">3</div><div class="lbl">matières</div></div>
+      <div class="stat-item"><div class="val" id="stat-rep">0</div><div class="lbl">répondues</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Matières</div>
+  <div class="subject-cards">
+    <div class="subject-card math" onclick="openSubject('math')">
+      <span class="sc-icon">📐</span>
+      <div class="sc-name math">Mathématiques</div>
+      <div class="sc-sub">Analyse · Algèbre · Probas · Géométrie</div>
+      <span class="sc-count math">120 questions</span>
+    </div>
+    <div class="subject-card phys" onclick="openSubject('phys')">
+      <span class="sc-icon">⚛️</span>
+      <div class="sc-name phys">Physique-Chimie</div>
+      <div class="sc-sub">Mécanique · Élec · Ondes · Chimie</div>
+      <span class="sc-count phys">110 questions</span>
+    </div>
+    <div class="subject-card philo" onclick="openSubject('philo')" style="grid-column:1/-1">
+      <span class="sc-icon">🦉</span>
+      <div class="sc-name philo">Philosophie</div>
+      <div class="sc-sub">17 notions · Auteurs · Dissertation · Explication de texte</div>
+      <span class="sc-count philo">130 questions</span>
+    </div>
+  </div>
+
+  <div class="section-title">Accès rapide — cours</div>
+  <div class="quick-grid">
+    <div class="quick-card" onclick="openSubject('math'); setTimeout(()=>switchTab('math','cours'),50)">
+      <div class="qc-label">Dérivées &amp; intégrales</div>
+      <div class="qc-sub">Toutes les formules</div>
+      <span class="qc-badge badge-math">Maths</span>
+    </div>
+    <div class="quick-card" onclick="openSubject('phys'); setTimeout(()=>switchTab('phys','cours'),50)">
+      <div class="qc-label">Mécanique</div>
+      <div class="qc-sub">Lois du mouvement</div>
+      <span class="qc-badge badge-phys">Physique</span>
+    </div>
+    <div class="quick-card" onclick="openSubject('philo'); setTimeout(()=>switchTab('philo','cours'),50)">
+      <div class="qc-label">La liberté &amp; la conscience</div>
+      <div class="qc-sub">Fiches notions</div>
+      <span class="qc-badge badge-philo">Philo</span>
+    </div>
+    <div class="quick-card" onclick="openSubject('philo'); setTimeout(()=>switchTab('philo','methodes'),50)">
+      <div class="qc-label">Dissertation philo</div>
+      <div class="qc-sub">Méthode complète</div>
+      <span class="qc-badge badge-philo">Philo</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ MATHS PAGE ══════════ -->
+<div id="page-math" class="subject-page">
+  <div class="sp-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="sp-header-text">
+      <h2 style="color:var(--math-h)">Mathématiques</h2>
+      <p>Spécialité Terminale — Programme Bac 2026</p>
+    </div>
+  </div>
+  <div class="sp-tabs">
+    <button class="sp-tab active math" onclick="switchTab('math','cours')">Cours</button>
+    <button class="sp-tab math" onclick="switchTab('math','qcm')">QCM</button>
+    <button class="sp-tab math" onclick="switchTab('math','formules')">Formulaire</button>
+    <button class="sp-tab math" onclick="switchTab('math','methodes')">Méthodes</button>
+  </div>
+  <div class="sp-content">
+
+    <!-- COURS MATHS -->
+    <div class="tab-pane active" id="math-cours">
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Limites et continuité <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p>La limite d'une fonction décrit son comportement quand x tend vers une valeur ou l'infini.</p>
+          <ul>
+            <li>Limite infinie : lim f(x) = +∞ quand x → a si f(x) devient arbitrairement grand</li>
+            <li>Formes indéterminées : ∞−∞, 0/0, ∞/∞, 0×∞ → lever l'indétermination</li>
+            <li><strong>Croissances comparées</strong> : eˣ domine xⁿ qui domine ln(x) en +∞</li>
+            <li>Théorème des gendarmes : g ≤ f ≤ h et g→L et h→L ⟹ f→L</li>
+            <li>Continuité en a : f définie en a, limite en a = f(a)</li>
+            <li>Théorème des valeurs intermédiaires (TVI) : si f continue sur [a,b], pour tout k entre f(a) et f(b), il existe c tel que f(c) = k</li>
+          </ul>
+          <div class="formula math">Règle de l'Hôpital (f/g → 0/0 ou ∞/∞) : lim f/g = lim f'/g'</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Dérivation — formules et applications <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li>(xⁿ)' = nxⁿ⁻¹ | (eˣ)' = eˣ | (ln x)' = 1/x</li>
+            <li>(sin x)' = cos x | (cos x)' = −sin x</li>
+            <li>(uv)' = u'v + uv' | (u/v)' = (u'v − uv')/v²</li>
+            <li>(f∘g)'(x) = g'(x)·f'(g(x))</li>
+          </ul>
+          <div class="formula math">(e^u)' = u'·e^u | (ln u)' = u'/u | (uⁿ)' = n·u'·uⁿ⁻¹</div>
+          <p><strong>Applications :</strong> étude de variations (signe de f'), équation de tangente y = f(a) + f'(a)(x−a), extrema locaux.</p>
+          <p><strong>Dérivée seconde</strong> : f''(x) = (f'(x))'. Si f'' > 0 → f convexe ; f'' < 0 → f concave. Point d'inflexion : f'' change de signe.</p>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Intégration <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula math">∫ₐᵇ f(x) dx = [F(x)]ₐᵇ = F(b) − F(a)</div>
+          <ul>
+            <li>∫ xⁿ dx = xⁿ⁺¹/(n+1) + C | ∫ eˣ dx = eˣ + C | ∫ 1/x dx = ln|x| + C</li>
+            <li>∫ cos x dx = sin x + C | ∫ sin x dx = −cos x + C</li>
+            <li>∫ u'/u dx = ln|u| + C | ∫ u'·eᵘ dx = eᵘ + C</li>
+          </ul>
+          <div class="formula math">Intégration par parties : ∫ u·v' = [uv] − ∫ u'·v</div>
+          <div class="formula math">Changement de variable : ∫ f(g(x))g'(x)dx = ∫ f(u) du  (u = g(x))</div>
+          <p><strong>Valeur moyenne</strong> : &lt;f&gt; = (1/(b−a))·∫ₐᵇ f(x)dx</p>
+          <p><strong>Aire entre deux courbes</strong> : A = ∫ₐᵇ |f(x) − g(x)| dx</p>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Équations différentielles <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula math">y' = ay  →  y = Ke^(at) (K déterminé par CI)</div>
+          <div class="formula math">y' = ay + b  →  y = Ke^(at) − b/a</div>
+          <p>Équation du second ordre : y'' + ω₀²·y = 0 → y = A cos(ω₀t) + B sin(ω₀t)</p>
+          <ul>
+            <li>Identifier le type, trouver une solution particulière, puis la solution homogène</li>
+            <li>Condition initiale : valeur en t=0 pour déterminer K</li>
+            <li>Modélisation : croissance/décroissance exponentielle, circuit RC, oscillateur</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Suites numériques <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula math">Arithmétique : uₙ = u₀ + n·r | Sₙ = (n+1)(u₀+uₙ)/2</div>
+          <div class="formula math">Géométrique : uₙ = u₀·qⁿ | Sₙ = u₀·(1−qⁿ⁺¹)/(1−q) (q≠1)</div>
+          <ul>
+            <li>Suite récurrente linéaire : uₙ₊₁ = a·uₙ + b → chercher le point fixe l = al+b</li>
+            <li>vₙ = uₙ − l est géométrique de raison a</li>
+            <li>Convergence : si |q| &lt; 1, uₙ→0. Si q≥1, diverge</li>
+            <li>Raisonnement par récurrence : initialisation → hérédité</li>
+            <li>Suite monotone bornée → convergente (admis)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Probabilités — loi binomiale &amp; loi normale <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula math">Loi binomiale B(n,p) : P(X=k) = C(n,k)·pᵏ·(1−p)ⁿ⁻ᵏ</div>
+          <div class="formula math">E(X) = np | σ(X) = √(np(1−p))</div>
+          <div class="formula math">Loi normale N(μ,σ²) : P(μ−σ &lt; X &lt; μ+σ) ≈ 68% | ±2σ ≈ 95%</div>
+          <div class="formula math">Intervalle de confiance 95% : p̂ ± 1,96√(p̂(1−p̂)/n)</div>
+          <ul>
+            <li>Loi normale centrée réduite N(0,1) : Z = (X−μ)/σ</li>
+            <li>Test d'hypothèse : H₀ (hypothèse nulle), p-valeur, région de rejet au seuil α</li>
+            <li>Variable aléatoire continue : densité f(x) avec ∫ f(x)dx = 1</li>
+            <li>Loi des grands nombres : fréquence → probabilité quand n → ∞</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Géométrie dans l'espace — vecteurs &amp; plans <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula math">Produit scalaire : u⃗·v⃗ = x₁x₂ + y₁y₂ + z₁z₂ = |u⃗||v⃗|cos θ</div>
+          <div class="formula math">Équation de plan : ax + by + cz + d = 0 (vecteur normal n⃗(a,b,c))</div>
+          <div class="formula math">Distance point-plan : d = |ax₀+by₀+cz₀+d| / √(a²+b²+c²)</div>
+          <ul>
+            <li>Droite paramétrique : M = A + t·v⃗ (t∈ℝ)</li>
+            <li>Colinéarité : u⃗ ∥ v⃗ ⟺ u⃗ = λv⃗</li>
+            <li>Orthogonalité : u⃗ ⊥ v⃗ ⟺ u⃗·v⃗ = 0</li>
+            <li>Sphère de centre Ω(a,b,c) et rayon r : (x−a)²+(y−b)²+(z−c)² = r²</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Nombres complexes <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula math">z = a + ib | |z|² = a² + b² | z̄ = a − ib</div>
+          <div class="formula math">Forme trigonométrique : z = r(cos θ + i sin θ) = r·e^(iθ)</div>
+          <div class="formula math">Formule d'Euler : e^(iθ) = cos θ + i sin θ</div>
+          <ul>
+            <li>Multiplication : |z₁z₂| = |z₁||z₂| et arg(z₁z₂) = arg(z₁) + arg(z₂)</li>
+            <li>Formule de Moivre : (e^(iθ))ⁿ = e^(inθ)</li>
+            <li>Racines nièmes de l'unité : zₖ = e^(2ikπ/n) pour k=0,...,n−1</li>
+            <li>Interprétation géométrique : multiplication par e^(iθ) = rotation d'angle θ</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Algèbre linéaire — matrices &amp; systèmes <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li>Opérations sur matrices : addition, produit (lignes × colonnes), transposée</li>
+            <li>Matrice inverse A⁻¹ : AA⁻¹ = I | det(A) ≠ 0</li>
+            <li>Résolution AX = B : X = A⁻¹B (si A inversible)</li>
+          </ul>
+          <div class="formula math">det([[a,b],[c,d]]) = ad − bc</div>
+          <p>Pivot de Gauss : substitution successive pour résoudre les systèmes.</p>
+          <p><strong>Graphes et matrices :</strong> matrice d'adjacence, suites définies par récurrence vectorielle uₙ₊₁ = M·uₙ.</p>
+        </div>
+      </div>
+
+    </div><!-- /math-cours -->
+
+    <!-- QCM MATHS -->
+    <div class="tab-pane" id="math-qcm">
+      <div class="qcm-toolbar">
+        <label>Nb de questions :</label>
+        <select id="math-nb">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="999">Toutes</option>
+        </select>
+        <button class="btn btn-math" onclick="startQCM('math')">🔀 Tirage aléatoire</button>
+      </div>
+      <div class="score-strip math" id="math-score-strip">
+        <div class="score-big math" id="math-score-big">0/0</div>
+        <div class="score-info">bonnes réponses · <span id="math-pct">0</span>%</div>
+      </div>
+      <div id="math-questions"></div>
+    </div>
+
+    <!-- FORMULAIRE MATHS -->
+    <div class="tab-pane" id="math-formules">
+      <div class="formula-grid">
+        <div class="formula math">DÉRIVÉES : (xⁿ)' = nxⁿ⁻¹ | (e^u)' = u'e^u | (ln u)' = u'/u | (sin u)' = u'cos u | (cos u)' = −u'sin u</div>
+        <div class="formula math">PRODUIT : (uv)' = u'v+uv' | QUOTIENT : (u/v)' = (u'v−uv')/v² | COMPOSÉE : (fog)' = g'×f'og</div>
+        <div class="formula math">INTÉGRALES : ∫xⁿ = xⁿ⁺¹/(n+1) | ∫e^x = e^x | ∫1/x = ln|x| | ∫cos = sin | ∫sin = −cos | ∫u'/u = ln|u|</div>
+        <div class="formula math">IPP : ∫u v' = [uv] − ∫u'v | Valeur moy : (1/(b−a))∫f | Aire : ∫|f−g|</div>
+        <div class="formula math">SUITES : arithm. uₙ=u₀+nr, Sₙ=(n+1)(u₀+uₙ)/2 | géom. uₙ=u₀qⁿ, Sₙ=u₀(1−qⁿ⁺¹)/(1−q)</div>
+        <div class="formula math">PROBAS : B(n,p) E=np σ=√(np(1−p)) | N(μ,σ²) IC95% : p̂±1,96√(p̂(1−p̂)/n)</div>
+        <div class="formula math">COMPLEXES : z=a+ib |z|=√(a²+b²) z̄=a−ib | forme exp : r·e^(iθ) | Euler : e^(iθ)=cosθ+isinθ</div>
+        <div class="formula math">VECTEURS : u⃗·v⃗=x₁x₂+y₁y₂+z₁z₂ | plan ax+by+cz+d=0 | dist = |ax₀+by₀+cz₀+d|/√(a²+b²+c²)</div>
+        <div class="formula math">ÉQ. DIFF : y'=ay → y=Ke^(at) | y'=ay+b → y=Ke^(at)−b/a | y''+ω²y=0 → Acos+Bsin</div>
+        <div class="formula math">CONVEXITÉ : f'' > 0 → convexe | f'' &lt; 0 → concave | f'' change de signe → inflexion</div>
+      </div>
+    </div>
+
+    <!-- MÉTHODES MATHS -->
+    <div class="tab-pane" id="math-methodes">
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Étude complète d'une fonction <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>1. Domaine Df</strong> : annuler dénominateurs, ln>0, √≥0</li>
+            <li><strong>2. Parité/périodicité</strong> : f(−x) vs f(x)</li>
+            <li><strong>3. Limites</strong> aux bornes et en ±∞ + asymptotes</li>
+            <li><strong>4. Dérivée</strong> f'(x), tableau de signe, extrema</li>
+            <li><strong>5. Convexité</strong> f''(x), points d'inflexion</li>
+            <li><strong>6. Tableau de variations</strong> complet</li>
+            <li><strong>7. Courbe</strong> avec points caractéristiques et asymptotes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Récurrence — structure d'une preuve <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Initialisation</strong> : vérifier la propriété P(n₀)</li>
+            <li><strong>Hérédité</strong> : supposer P(n) vraie (HR), montrer P(n+1)</li>
+            <li><strong>Conclusion</strong> : par le principe de récurrence, P(n) vraie pour tout n ≥ n₀</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Calculer une probabilité conditionnelle <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula math">P(A|B) = P(A∩B) / P(B)</div>
+          <div class="formula math">Formule des probabilités totales : P(A) = Σ P(A|Bᵢ)·P(Bᵢ)</div>
+          <div class="formula math">Bayes : P(Bᵢ|A) = P(A|Bᵢ)·P(Bᵢ) / P(A)</div>
+          <p>Utiliser un arbre pondéré pour visualiser les partitions de l'univers.</p>
+        </div>
+      </div>
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Géométrie analytique — trouver une intersection <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li>Droite ∩ Plan : substituer les paramètres de la droite dans l'équation du plan</li>
+            <li>Plan ∩ Plan : résoudre le système de deux équations (droite d'intersection)</li>
+            <li>Vérifier que les résultats sont bien dans les deux ensembles</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-math -->
+
+<!-- ══════════ PHYSIQUE PAGE ══════════ -->
+<div id="page-phys" class="subject-page">
+  <div class="sp-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="sp-header-text">
+      <h2 style="color:var(--phys-h)">Physique-Chimie</h2>
+      <p>Spécialité Terminale — Programme Bac 2026</p>
+    </div>
+  </div>
+  <div class="sp-tabs">
+    <button class="sp-tab active phys" onclick="switchTab('phys','cours')">Cours</button>
+    <button class="sp-tab phys" onclick="switchTab('phys','qcm')">QCM</button>
+    <button class="sp-tab phys" onclick="switchTab('phys','formules')">Formulaire</button>
+    <button class="sp-tab phys" onclick="switchTab('phys','methodes')">Méthodes</button>
+  </div>
+  <div class="sp-content">
+
+    <div class="tab-pane active" id="phys-cours">
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Mécanique — lois de Newton <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">2e loi de Newton : Σf⃗ = m·a⃗  (dans un référentiel galiléen)</div>
+          <ul>
+            <li><strong>1ère loi (inertie)</strong> : si Σf⃗ = 0⃗ → vitesse constante (ou nulle)</li>
+            <li><strong>3ème loi (réciprocité)</strong> : f⃗(A→B) = −f⃗(B→A)</li>
+            <li>Poids : P⃗ = m·g⃗ (g ≈ 9,81 m/s² sur Terre)</li>
+            <li>Force de frottement fluide : f⃗ = −k·v⃗</li>
+            <li>Référentiels : terrestre (galiléen approx.), géocentrique, héliocentrique</li>
+          </ul>
+          <div class="formula phys">Projectile : x = v₀cosα·t | y = v₀sinα·t − ½gt²</div>
+          <div class="formula phys">Vitesse : vx = v₀cosα (cste) | vy = v₀sinα − g·t</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Énergie mécanique et travail <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">Ec = ½mv² | Ep = mgh | Em = Ec + Ep</div>
+          <div class="formula phys">Travail : W = F·d·cos θ (J) | Puissance : P = W/t = F·v·cos θ (W)</div>
+          <ul>
+            <li>Théorème travail-énergie cinétique : ΔEc = ΣW(toutes les forces)</li>
+            <li>Conservation de Em si seul le poids travaille (forces conservatives)</li>
+            <li>Énergie potentielle élastique : Ep = ½kx²</li>
+            <li>Rendement : η = P_utile / P_totale</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Oscillations — pendule et ressort <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">Équation du mouvement : ẍ + ω₀²x = 0  →  x(t) = A cos(ω₀t + φ)</div>
+          <div class="formula phys">Ressort : ω₀ = √(k/m) | T₀ = 2π√(m/k)</div>
+          <div class="formula phys">Pendule simple : ω₀ = √(g/l) | T₀ = 2π√(l/g)</div>
+          <ul>
+            <li>Oscillateur amorti : ẍ + 2λẋ + ω₀²x = 0 (λ = facteur d'amortissement)</li>
+            <li>Résonance en amplitude : ω_r = √(ω₀² − 2λ²)</li>
+            <li>Régime critique (λ = ω₀) : retour à l'équilibre le plus rapide sans oscillation</li>
+            <li>A et φ déterminés par les conditions initiales x(0) et ẋ(0)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Électricité — circuits et dipôles <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">Ohm : U = RI | P = UI = RI² = U²/R</div>
+          <div class="formula phys">Condensateur : i = C·du/dt | u_C(t) = E(1 − e^(−t/τ)) en charge</div>
+          <div class="formula phys">Bobine : u = L·di/dt | RC : τ = RC | RL : τ = L/R</div>
+          <div class="formula phys">RLC série : ω₀ = 1/√(LC) | Q = Lω₀/R = 1/(RC·ω₀)</div>
+          <ul>
+            <li>Lois de Kirchhoff : ΣI = 0 (nœuds) | ΣU = 0 (mailles)</li>
+            <li>Valeur efficace : U_eff = U_max/√2 | P = U_eff·I_eff·cosφ</li>
+            <li>Impédances : Z_R = R | Z_C = 1/(Cω) | Z_L = Lω</li>
+            <li>Résonance série : Z_min = R à ω₀ → I_max</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Optique — ondes et lumière <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">Snell-Descartes : n₁ sin i₁ = n₂ sin i₂</div>
+          <div class="formula phys">v = λf | T = 1/f | c = 3×10⁸ m/s | n = c/v</div>
+          <ul>
+            <li>Réflexion totale : sin i_c = n₂/n₁ (avec n₁ > n₂)</li>
+            <li>Diffraction : centrale plus grande que λ/a est grand (a = taille obstacle)</li>
+            <li>Interférences Young : δ = a·x/D | frange brillante si δ = kλ</li>
+            <li>Lentille convergente : 1/v − 1/u = 1/f' | γ = v/u | f' = 1/D (dioptries)</li>
+            <li>Effet Doppler : f_obs = f_source × (c + v_obs)/(c − v_source) (approche)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Thermodynamique <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">Gaz parfait : PV = nRT (R = 8,314 J/mol·K | T en Kelvin)</div>
+          <div class="formula phys">1er principe : ΔU = W + Q</div>
+          <ul>
+            <li>Transformations : isotherme T=cste | isobare P=cste | isochore V=cste | adiabatique Q=0</li>
+            <li>Énergie interne gaz parfait monoatomique : U = (3/2)nRT → ΔU = nCvΔT</li>
+            <li>Transfert thermique par conduction : φ = λS(T₂−T₁)/e</li>
+            <li>Machine thermique : rendement η = W/Q_chaud ≤ 1 − T_froid/T_chaud (Carnot)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Chimie — équilibres et cinétique <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">Constante d'équilibre : K = Π[produits]^ν / Π[réactifs]^ν</div>
+          <div class="formula phys">Acides-bases : pH = −log[H₃O⁺] | pKa = −log Ka | pH = pKe − pOH</div>
+          <div class="formula phys">Loi de vitesse : v = k[A]^α[B]^β</div>
+          <ul>
+            <li>Taux d'avancement : τ = x_éq / x_max</li>
+            <li>Henderson-Hasselbalch : pH = pKa + log([A⁻]/[HA])</li>
+            <li>Cinétique ordre 1 : [A] = [A]₀·e^(−kt) | t½ = ln2/k</li>
+            <li>Cinétique ordre 2 : 1/[A] = 1/[A]₀ + kt</li>
+            <li>Énergie d'activation : k = A·e^(−Ea/RT) (loi d'Arrhenius)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Chimie organique — réactions et mécanismes <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Substitution nucléophile (SN)</strong> : Nu: attaque le C portant le nucléofuge → SN1 ou SN2</li>
+            <li><strong>Élimination (E)</strong> : formation d'une double liaison, compétition avec SN</li>
+            <li><strong>Addition électrophile (AE)</strong> : sur alcènes — règle de Markovnikov (H+ sur C le plus hydrogéné)</li>
+            <li><strong>Oxydoréduction</strong> : alcool primaire → aldéhyde → acide | secondaire → cétone</li>
+            <li>Estérification : acide + alcool ⇌ ester + eau (lente, limitée, athermique)</li>
+            <li>Saponification : ester + HO⁻ → carboxylate + alcool (totale, rapide)</li>
+            <li>Polymérisation : addition (alkène) ou condensation (polyester, polyamide)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Physique quantique et nucléaire <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">Énergie photon : E = hf = hc/λ (h = 6,626×10⁻³⁴ J·s)</div>
+          <div class="formula phys">Énergie-masse : E = mc² | Défaut de masse : Δm = Z·mₚ + N·mₙ − m_noyau</div>
+          <div class="formula phys">Décroissance radioactive : N(t) = N₀·e^(−λt) | t½ = ln2/λ | A = λN</div>
+          <ul>
+            <li>Désintégrations : α (−2p−2n), β⁻ (n→p+e⁻+ν̄), β⁺ (p→n+e⁺+ν), γ (énergie seule)</li>
+            <li>Lois de conservation : A (nucléons), Z (charge), énergie-masse</li>
+            <li>Niveaux d'énergie : ΔE = hf pour photon émis ou absorbé</li>
+            <li>Dualité onde-corpuscule : λ_de_Broglie = h/(mv)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /phys-cours -->
+
+    <!-- QCM PHYSIQUE -->
+    <div class="tab-pane" id="phys-qcm">
+      <div class="qcm-toolbar">
+        <label>Nb de questions :</label>
+        <select id="phys-nb">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="999">Toutes</option>
+        </select>
+        <button class="btn btn-phys" onclick="startQCM('phys')">🔀 Tirage aléatoire</button>
+      </div>
+      <div class="score-strip phys" id="phys-score-strip">
+        <div class="score-big phys" id="phys-score-big">0/0</div>
+        <div class="score-info">bonnes réponses · <span id="phys-pct">0</span>%</div>
+      </div>
+      <div id="phys-questions"></div>
+    </div>
+
+    <!-- FORMULAIRE PHYSIQUE -->
+    <div class="tab-pane" id="phys-formules">
+      <div class="formula-grid">
+        <div class="formula phys">NEWTON : Σf⃗=ma⃗ | P=mg | W=Fd cosθ | Ec=½mv² | Ep=mgh | Em=Ec+Ep</div>
+        <div class="formula phys">PROJECTILE : x=v₀cosα·t | y=v₀sinα·t−½gt² | portée=v₀²sin2α/g</div>
+        <div class="formula phys">OSCILLATEURS : ω₀=√(k/m) | T=2π/ω₀ | pendule T=2π√(l/g) | x=Acos(ω₀t+φ)</div>
+        <div class="formula phys">ÉLEC : U=RI | P=UI | τ_RC=RC | τ_RL=L/R | ω₀=1/√(LC) | U_eff=U_max/√2</div>
+        <div class="formula phys">OPTIQUE : n=c/v | n₁sini₁=n₂sini₂ | v=λf | lentille 1/v−1/u=1/f' | γ=v/u</div>
+        <div class="formula phys">THERMODYNAMIQUE : PV=nRT | ΔU=W+Q | η≤1−Tf/Tc (Carnot)</div>
+        <div class="formula phys">CHIMIE : pH=−log[H₃O⁺] | K=Π[P]^ν/Π[R]^ν | v=k[A]^α[B]^β | k=Ae^(−Ea/RT)</div>
+        <div class="formula phys">NUCLÉAIRE : E=hf=hc/λ | E=mc² | N=N₀e^(−λt) | t½=ln2/λ | A=λN</div>
+      </div>
+    </div>
+
+    <!-- MÉTHODES PHYSIQUE -->
+    <div class="tab-pane" id="phys-methodes">
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Résoudre un problème de mécanique <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>1. Schéma</strong> : système, forces, référentiel galiléen</li>
+            <li><strong>2. Bilan des forces</strong> : poids, réaction normale, frottement, tension...</li>
+            <li><strong>3. Appliquer Newton</strong> : Σf⃗ = ma⃗, projeter sur les axes x et y</li>
+            <li><strong>4. Résoudre</strong> les équations différentielles ou algébriques</li>
+            <li><strong>5. Conditions initiales</strong> : x(0), y(0), vx(0), vy(0)</li>
+            <li><strong>6. Vérifier</strong> les dimensions (homogénéité) et le sens physique</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Analyser un circuit électrique <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li>Identifier les mailles, les nœuds, les dipôles</li>
+            <li>Appliquer les lois de Kirchhoff (courants aux nœuds, tensions aux mailles)</li>
+            <li>Écrire l'équation différentielle si condensateur ou bobine</li>
+            <li>Résoudre : solution homogène + solution particulière</li>
+            <li>Appliquer la condition initiale (u_C(0) ou i_L(0))</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Dosage — calcul de concentration <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula phys">À l'équivalence : n_acide = n_base (réaction 1:1)</div>
+          <div class="formula phys">n = C × V (mol = mol/L × L)</div>
+          <ul>
+            <li>Point d'équivalence : dérivée max de la courbe pH, ou indicateur coloré</li>
+            <li>Avant l'équivalence : réactif titré en excès</li>
+            <li>Après l'équivalence : réactif titrant en excès</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-phys -->
+
+<!-- ══════════ PHILOSOPHIE PAGE ══════════ -->
+<div id="page-philo" class="subject-page">
+  <div class="sp-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="sp-header-text">
+      <h2 style="color:var(--philo-h)">Philosophie</h2>
+      <p>Matière obligatoire Terminale — Programme Bac 2026</p>
+    </div>
+  </div>
+  <div class="sp-tabs">
+    <button class="sp-tab active philo" onclick="switchTab('philo','cours')">Notions</button>
+    <button class="sp-tab philo" onclick="switchTab('philo','qcm')">QCM</button>
+    <button class="sp-tab philo" onclick="switchTab('philo','auteurs')">Auteurs</button>
+    <button class="sp-tab philo" onclick="switchTab('philo','methodes')">Méthodes</button>
+  </div>
+  <div class="sp-content">
+
+    <!-- NOTIONS PHILO -->
+    <div class="tab-pane active" id="philo-cours">
+      <p style="font-size:12px;color:var(--ink3);margin-bottom:1rem;">Programme officiel — 17 notions du Bac 2026. Cliquer pour développer.</p>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La conscience <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Faculté de l'esprit à se représenter soi-même et le monde. Double sens : <em>conscience psychologique</em> (avoir des perceptions, pensées) et <em>conscience morale</em> (sens du bien et du mal).</p>
+          <ul>
+            <li><strong>Conscience immédiate</strong> : présence à soi-même dans l'instant (cogito de Descartes)</li>
+            <li><strong>Conscience réflexive</strong> : se prendre soi-même pour objet de pensée</li>
+            <li>Problème du rapport âme/corps : dualisme cartésien vs monisme</li>
+            <li>L'inconscient remet-il en cause la toute-puissance de la conscience ? (Freud)</li>
+          </ul>
+          <div class="formula philo">Descartes : « Je pense, donc je suis » — le cogito comme certitude première</div>
+          <div class="formula philo">Sartre : la conscience est « néant », elle est conscience de quelque chose (intentionnalité)</div>
+          <span class="auteur-chip">Descartes</span><span class="auteur-chip">Hegel</span><span class="auteur-chip">Sartre</span><span class="auteur-chip">Freud</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">L'inconscient <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Ce qui échappe à la conscience tout en influençant nos pensées, désirs et comportements.</p>
+          <ul>
+            <li><strong>Freud</strong> : 3 instances — Ça (pulsions), Moi (médiateur), Surmoi (normes intériorisées)</li>
+            <li>Mécanismes de défense : refoulement, déni, projection, sublimation</li>
+            <li>Expressions de l'inconscient : rêves, lapsus, actes manqués, symptômes</li>
+            <li>Objection : l'inconscient supprime-t-il la liberté et la responsabilité ?</li>
+          </ul>
+          <div class="formula philo">Freud : « Le moi n'est pas maître dans sa propre maison »</div>
+          <span class="auteur-chip">Freud</span><span class="auteur-chip">Lacan</span><span class="auteur-chip">Sartre (contre)</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La liberté <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Pouvoir d'agir selon sa propre volonté, sans contrainte extérieure ni intérieure.</p>
+          <ul>
+            <li><strong>Libre arbitre</strong> (Descartes) : faculté de choisir sans être déterminé</li>
+            <li><strong>Déterminisme</strong> (Spinoza, Marx) : tout effet a une cause, l'illusion de liberté vient de l'ignorance des causes</li>
+            <li><strong>Liberté politique</strong> : liberté négative (absence de contrainte) vs positive (capacité réelle d'agir)</li>
+            <li>Sartre : « L'existence précède l'essence » — l'homme est condamné à être libre</li>
+            <li>Liberté et responsabilité : être libre implique d'assumer ses choix</li>
+          </ul>
+          <div class="formula philo">Spinoza : « Les hommes se croient libres parce qu'ils ont conscience de leurs désirs mais ignorent les causes qui les déterminent »</div>
+          <span class="auteur-chip">Descartes</span><span class="auteur-chip">Spinoza</span><span class="auteur-chip">Rousseau</span><span class="auteur-chip">Kant</span><span class="auteur-chip">Sartre</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Le désir <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Tendance vers ce dont on manque et qui procurerait satisfaction. Distinct du besoin (naturel) et de la volonté (rationnelle).</p>
+          <ul>
+            <li><strong>Platon</strong> (Banquet) : le désir comme manque — on désire ce qu'on n'a pas</li>
+            <li><strong>Spinoza</strong> : le désir est l'essence même de l'homme (conatus)</li>
+            <li><strong>Épicure</strong> : distingue désirs naturels/nécessaires des désirs vains → chercher l'ataraxie</li>
+            <li>Le désir peut-il être satisfait ? Problème de l'insatisfaction perpétuelle (Schopenhauer)</li>
+            <li>Désir mimétique : on désire ce que l'autre désire (Girard)</li>
+          </ul>
+          <div class="formula philo">Épicure : classifier les désirs → naturels et nécessaires (manger) / naturels non nécessaires / vains (gloire)</div>
+          <span class="auteur-chip">Platon</span><span class="auteur-chip">Épicure</span><span class="auteur-chip">Spinoza</span><span class="auteur-chip">Hegel</span><span class="auteur-chip">Schopenhauer</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La raison et le réel <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Raison :</strong> Faculté de penser selon des principes logiques et universels. <strong>Réel :</strong> Ce qui existe indépendamment de notre représentation.</p>
+          <ul>
+            <li>Rationalisme (Descartes, Kant) : la raison produit des vérités a priori</li>
+            <li>Empirisme (Hume, Locke) : toute connaissance vient de l'expérience sensible</li>
+            <li>Criticisme kantien : synthèse — l'entendement met de l'ordre dans les données sensibles</li>
+            <li>La science est-elle rationnelle ? Popper : falsifiabilité comme critère</li>
+          </ul>
+          <div class="formula philo">Kant : « Des intuitions sans concepts sont aveugles ; des concepts sans intuitions sont vides »</div>
+          <span class="auteur-chip">Descartes</span><span class="auteur-chip">Hume</span><span class="auteur-chip">Kant</span><span class="auteur-chip">Popper</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La vérité <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Adéquation d'un énoncé avec la réalité (vérité-correspondance), ou cohérence d'un système logique (vérité-cohérence).</p>
+          <ul>
+            <li>Vérité vs opinion (doxa) : la vérité est universelle, l'opinion est subjective</li>
+            <li>Vérité scientifique : provisoire, falsifiable, soumise à révision (Popper)</li>
+            <li>Vérité et certitude : peut-on être certain d'une vérité ? (Descartes : doute méthodique)</li>
+            <li>Pragmatisme (James) : une vérité est ce qui est utile, ce qui marche</li>
+            <li>Relativisme : y a-t-il des vérités absolues ou tout est-il relatif à une culture ?</li>
+          </ul>
+          <div class="formula philo">Nietzsche : « Il n'y a pas de faits, seulement des interprétations » — perspectivisme</div>
+          <span class="auteur-chip">Platon</span><span class="auteur-chip">Descartes</span><span class="auteur-chip">Nietzsche</span><span class="auteur-chip">Popper</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Le langage <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Système de signes permettant la communication et l'expression de la pensée.</p>
+          <ul>
+            <li>Signe linguistique (Saussure) : signifiant (image acoustique) + signifié (concept) — arbitraire</li>
+            <li>Langage et pensée : le langage structure-t-il la pensée ou l'inverse ? (Wittgenstein)</li>
+            <li>Langage comme pouvoir : rhétorique, mensonge, propagande</li>
+            <li>Langage propre à l'homme ? Parole vs communication animale (Aristote)</li>
+            <li>Performatif (Austin) : certains énoncés font ce qu'ils disent (promettre, jurer)</li>
+          </ul>
+          <div class="formula philo">Wittgenstein : « Les limites de mon langage signifient les limites de mon propre monde »</div>
+          <span class="auteur-chip">Aristote</span><span class="auteur-chip">Saussure</span><span class="auteur-chip">Wittgenstein</span><span class="auteur-chip">Austin</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Le temps <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Dimension de l'existence marquée par la succession passé-présent-futur et par la conscience de la durée.</p>
+          <ul>
+            <li>Temps objectif (physique) vs temps subjectif (vécu, durée bergsonienne)</li>
+            <li>Augustin : le passé est dans la mémoire, le présent dans l'attention, le futur dans l'attente</li>
+            <li>Heidegger : l'être-pour-la-mort structure notre rapport au temps (souci, projet)</li>
+            <li>Bergson : la durée réelle (intuition) vs le temps spatialisé (mesuré)</li>
+            <li>Problème : peut-on agir sur le passé ? Sens de l'histoire.</li>
+          </ul>
+          <div class="formula philo">Heidegger : « L'être-pour-la-mort » — l'angoisse face à la finitude nous révèle notre liberté</div>
+          <span class="auteur-chip">Augustin</span><span class="auteur-chip">Bergson</span><span class="auteur-chip">Heidegger</span><span class="auteur-chip">Husserl</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La société et l'État <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Société :</strong> Ensemble d'individus liés par des règles, des institutions et des pratiques communes. <strong>État :</strong> Institution politique souveraine disposant du monopole de la violence légitime.</p>
+          <ul>
+            <li><strong>Contrat social</strong> : Rousseau (volonté générale), Hobbes (Léviathan contre guerre de tous contre tous), Locke (droits naturels)</li>
+            <li>État de nature : hypothèse pour penser les fondements de la société politique</li>
+            <li>Légitimité du pouvoir : consentement (démocratie), tradition, charisme (Weber)</li>
+            <li>Marx : l'État comme outil de la classe dominante → dépassement dans le communisme</li>
+            <li>Justice sociale : mérite, besoin, égalité (Rawls : voile d'ignorance)</li>
+          </ul>
+          <div class="formula philo">Hobbes : sans État, la vie humaine serait « solitaire, misérable, dangereuse, bestiale et courte »</div>
+          <span class="auteur-chip">Hobbes</span><span class="auteur-chip">Locke</span><span class="auteur-chip">Rousseau</span><span class="auteur-chip">Marx</span><span class="auteur-chip">Rawls</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La justice <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Principe d'attribution à chacun de ce qui lui revient, selon le droit, le mérite ou l'égalité.</p>
+          <ul>
+            <li>Justice commutative : échanges équitables entre individus</li>
+            <li>Justice distributive : répartition équitable des biens dans la société</li>
+            <li>Justice et droit : le droit est-il toujours juste ? Droit naturel vs droit positif</li>
+            <li>Rawls : principe de différence — les inégalités ne sont acceptables que si elles bénéficient aux plus défavorisés</li>
+            <li>Vengeance vs punition : la peine doit-elle être rétributive ou réhabilitative ?</li>
+          </ul>
+          <div class="formula philo">Platon : la justice = chacun à sa place, harmonie de l'âme et de la cité (République)</div>
+          <span class="auteur-chip">Platon</span><span class="auteur-chip">Aristote</span><span class="auteur-chip">Kant</span><span class="auteur-chip">Rawls</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La morale <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Ensemble de règles guidant l'action pour distinguer le bien du mal.</p>
+          <ul>
+            <li><strong>Éthique des vertus</strong> (Aristote) : viser le bonheur (eudaimonie) par l'exercice des vertus</li>
+            <li><strong>Déontologie</strong> (Kant) : agir selon le devoir — impératif catégorique</li>
+            <li><strong>Conséquentialisme</strong> (utilitarisme, Mill) : l'action bonne maximise le bonheur du plus grand nombre</li>
+            <li>Relativisme moral : les valeurs morales sont-elles universelles ou culturelles ?</li>
+            <li>Morale et religion : peut-il y avoir une morale sans Dieu ?</li>
+          </ul>
+          <div class="formula philo">Kant : « Agis uniquement d'après la maxime qui fait que tu peux vouloir en même temps qu'elle devienne une loi universelle »</div>
+          <span class="auteur-chip">Aristote</span><span class="auteur-chip">Kant</span><span class="auteur-chip">Mill</span><span class="auteur-chip">Nietzsche</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Le bonheur <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> État de satisfaction complète et durable. Distinct du plaisir (passager) et de la joie (intense mais momentanée).</p>
+          <ul>
+            <li><strong>Épicurisme</strong> : bonheur = ataraxie (absence de troubles) + aponie (absence de douleur)</li>
+            <li><strong>Stoïcisme</strong> (Épictète) : bonheur = conformité à la raison, maîtrise de soi face à ce qui ne dépend pas de nous</li>
+            <li><strong>Aristote</strong> : eudaimonie — vie selon la vertu et l'accomplissement de sa nature</li>
+            <li>Le bonheur est-il possible ? La souffrance est-elle évitable ?</li>
+            <li>Bonheur individuel vs bonheur collectif : compatibles ?</li>
+          </ul>
+          <div class="formula philo">Épictète : « Les hommes ne sont pas troublés par les événements, mais par les opinions qu'ils ont des événements »</div>
+          <span class="auteur-chip">Épicure</span><span class="auteur-chip">Épictète</span><span class="auteur-chip">Aristote</span><span class="auteur-chip">Kant</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">L'art <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Activité humaine qui produit des œuvres à visée esthétique ou expressive.</p>
+          <ul>
+            <li>Art vs technique (techné) : l'art produit le beau, la technique l'utile</li>
+            <li><strong>Platon</strong> : l'art est mimèsis (imitation), éloignement du vrai → dangereux</li>
+            <li><strong>Kant</strong> : jugement de goût — subjectif mais à prétention d'universalité ; le génie crée sans règles</li>
+            <li><strong>Hegel</strong> : l'art exprime l'Esprit absolu — philosophie de l'histoire de l'art</li>
+            <li>L'art peut-il tout dire ? Art engagé, censure, provocation</li>
+            <li>Beauté naturelle vs beauté artistique</li>
+          </ul>
+          <div class="formula philo">Kant : « Est beau ce qui plaît universellement sans concept » (Critique de la faculté de juger)</div>
+          <span class="auteur-chip">Platon</span><span class="auteur-chip">Aristote</span><span class="auteur-chip">Kant</span><span class="auteur-chip">Hegel</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La technique <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Ensemble des moyens que l'homme met en œuvre pour transformer le monde selon ses besoins.</p>
+          <ul>
+            <li>Technique et humanité : Homo faber — la technique est constitutive de l'homme</li>
+            <li><strong>Heidegger</strong> : la technique moderne (arraisonnement) menace de réduire la nature à une ressource exploitable</li>
+            <li>Technique et aliénation (Marx) : la machine peut asservir l'ouvrier</li>
+            <li>Progrès technique = progrès moral ? Les deux ne coïncident pas forcément</li>
+            <li>Intelligence artificielle : nouvelles questions éthiques</li>
+          </ul>
+          <div class="formula philo">Heidegger : la technique n'est pas neutre — elle dévoile le monde d'une certaine façon (l'étant comme « fonds disponible »)</div>
+          <span class="auteur-chip">Marx</span><span class="auteur-chip">Bergson</span><span class="auteur-chip">Heidegger</span><span class="auteur-chip">Ellul</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La nature <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Ce qui existe sans intervention humaine ; aussi l'ensemble des caractéristiques innées d'un être.</p>
+          <ul>
+            <li>Nature et culture : inné vs acquis — qu'est-ce qui est « naturel » chez l'homme ?</li>
+            <li>État de nature (Hobbes, Rousseau) : hypothèse sur l'homme avant la société</li>
+            <li>Natura naturans (Spinoza) : la nature comme puissance créatrice, Dieu = Nature</li>
+            <li>Écologie et philosophie : droit de la nature, deep ecology</li>
+            <li>Naturalisme moral : ce qui est naturel est-il automatiquement bon ?</li>
+          </ul>
+          <div class="formula philo">Rousseau : « L'homme naît bon, c'est la société qui le corrompt »</div>
+          <span class="auteur-chip">Aristote</span><span class="auteur-chip">Rousseau</span><span class="auteur-chip">Spinoza</span><span class="auteur-chip">Darwin</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">La religion <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Définition :</strong> Ensemble de croyances et pratiques relatives au sacré, qui lient une communauté à une puissance supérieure.</p>
+          <ul>
+            <li>Religion et raison : foi vs raison — compatibles ou opposées ? (Pascal, Averroès)</li>
+            <li>Critique de la religion : illusion (Freud), aliénation (Marx), nihilisme (Nietzsche)</li>
+            <li>Preuves de l'existence de Dieu : ontologique (Anselme), cosmologique, téléologique</li>
+            <li>Laïcité : séparation de l'État et de la religion (dimension politique)</li>
+            <li>Religion et morale : la morale a-t-elle besoin de la religion ?</li>
+          </ul>
+          <div class="formula philo">Marx : « La religion est l'opium du peuple » — consolation face aux souffrances réelles</div>
+          <span class="auteur-chip">Pascal</span><span class="auteur-chip">Spinoza</span><span class="auteur-chip">Kant</span><span class="auteur-chip">Marx</span><span class="auteur-chip">Freud</span>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">L'existence et le temps (existentiel) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <p><strong>Thème transversal :</strong> La condition humaine comme être temporel, mortel, libre et angoissé.</p>
+          <ul>
+            <li>Existentialisme (Sartre) : « L'existence précède l'essence » — l'homme se crée lui-même par ses choix</li>
+            <li>Condition humaine (Arendt) : labor (nécessité), work (œuvre), action (politique)</li>
+            <li>Absurde (Camus) : tension entre la soif de sens et le silence du monde</li>
+            <li>Autrui : solipsisme ou intersubjectivité ? Autrui comme enfer ou condition de ma liberté ?</li>
+            <li>La mort : faut-il y penser ? Épicure (la mort n'est rien pour nous) vs Heidegger (être-pour-la-mort)</li>
+          </ul>
+          <div class="formula philo">Sartre : « L'enfer, c'est les autres » (Huis Clos) — mais aussi : autrui me révèle à moi-même</div>
+          <span class="auteur-chip">Sartre</span><span class="auteur-chip">Camus</span><span class="auteur-chip">Heidegger</span><span class="auteur-chip">Arendt</span>
+        </div>
+      </div>
+
+    </div><!-- /philo-cours -->
+
+    <!-- QCM PHILO -->
+    <div class="tab-pane" id="philo-qcm">
+      <div class="qcm-toolbar">
+        <label>Nb de questions :</label>
+        <select id="philo-nb">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="999">Toutes</option>
+        </select>
+        <button class="btn btn-philo" onclick="startQCM('philo')">🔀 Tirage aléatoire</button>
+      </div>
+      <div class="score-strip philo" id="philo-score-strip">
+        <div class="score-big philo" id="philo-score-big">0/0</div>
+        <div class="score-info">bonnes réponses · <span id="philo-pct">0</span>%</div>
+      </div>
+      <div id="philo-questions"></div>
+    </div>
+
+    <!-- AUTEURS PHILO -->
+    <div class="tab-pane" id="philo-auteurs">
+      <p style="font-size:12px;color:var(--ink3);margin-bottom:1rem;">Auteurs majeurs du programme — thèses essentielles à connaître.</p>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Platon (428–348 av. J.-C.) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Théorie des Idées</strong> : le monde sensible est une imitation du monde intelligible (les Idées, éternelles et parfaites)</li>
+            <li><strong>Allégorie de la caverne</strong> (République) : l'éducation comme sortie de la caverne vers la lumière du Bien</li>
+            <li>L'âme tripartite : raison / thumos (cœur) / appétits — justice = harmonie des trois parties</li>
+            <li>L'art = imitation de l'imitation : dangereux car éloigne du vrai</li>
+            <li>Notions : vérité, art, justice, désir, connaissance</li>
+          </ul>
+          <div class="formula philo">Textes clés : La République, Le Banquet, Phédon, Ménon</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Aristote (384–322 av. J.-C.) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Éthique des vertus</strong> : le bonheur (eudaimonie) comme finalité de l'homme — vertu = juste milieu</li>
+            <li>Politique : « L'homme est un animal politique » — la cité est naturelle</li>
+            <li>Logique : syllogisme, catégories, principe de non-contradiction</li>
+            <li>Causes : matérielle, formelle, efficiente, finale</li>
+            <li>Notions : bonheur, morale, justice, langage, nature</li>
+          </ul>
+          <div class="formula philo">Textes clés : Éthique à Nicomaque, La Politique, Métaphysique</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Descartes (1596–1650) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Doute méthodique</strong> : douter de tout pour trouver une certitude indubitable</li>
+            <li><strong>Cogito</strong> : « Je pense donc je suis » — première vérité indubitabe</li>
+            <li><strong>Dualisme</strong> : distinction âme (res cogitans) et corps (res extensa)</li>
+            <li>Libre arbitre : infini et volonté distincte de l'entendement</li>
+            <li>Notions : conscience, liberté, vérité, raison</li>
+          </ul>
+          <div class="formula philo">Textes clés : Méditations métaphysiques, Discours de la méthode, Traité des passions</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Kant (1724–1804) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Révolution copernicienne</strong> : ce n'est pas l'esprit qui s'adapte au monde, mais l'inverse — les catégories a priori structurent l'expérience</li>
+            <li><strong>Impératif catégorique</strong> : agis comme si ta maxime devait devenir loi universelle</li>
+            <li>Critique de la métaphysique : raison pure (limites), raison pratique (morale), faculté de juger (esthétique)</li>
+            <li>Dignité humaine : l'homme est une fin en soi, jamais un simple moyen</li>
+            <li>Notions : liberté, morale, vérité, art, religion</li>
+          </ul>
+          <div class="formula philo">Textes clés : Critique de la raison pure, Fondements de la métaphysique des mœurs, Critique de la faculté de juger</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Spinoza (1632–1677) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Monisme</strong> : une seule substance — Dieu = Nature (Deus sive Natura)</li>
+            <li>Déterminisme universel : tout est déterminé, le libre arbitre est une illusion</li>
+            <li><strong>Conatus</strong> : chaque être tend à persévérer dans son être — le désir est l'essence de l'homme</li>
+            <li>La joie comme accroissement de puissance d'agir</li>
+            <li>Notions : liberté, désir, nature, religion</li>
+          </ul>
+          <div class="formula philo">Textes clés : Éthique (more geometrico), Traité théologico-politique</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Nietzsche (1844–1900) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Mort de Dieu</strong> : effondrement des valeurs absolues — nihilisme comme diagnostic</li>
+            <li><strong>Volonté de puissance</strong> : force créatrice, non violence — auto-dépassement</li>
+            <li><strong>Éternel retour</strong> : aimer sa vie au point de vouloir la revivre infiniment</li>
+            <li>Généalogie de la morale : critiquer l'origine des valeurs (morale des esclaves vs des maîtres)</li>
+            <li>Notions : vérité, morale, bonheur, art, religion</li>
+          </ul>
+          <div class="formula philo">Textes clés : Ainsi parlait Zarathoustra, Par-delà le bien et le mal, Généalogie de la morale</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Freud (1856–1939) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Topiques</strong> : 1ère (conscient/préconscient/inconscient) et 2ème (Ça/Moi/Surmoi)</li>
+            <li>Méthode : psychanalyse — associations libres, analyse des rêves, transfert</li>
+            <li>Mécanismes de défense : refoulement (principal), déni, projection, sublimation</li>
+            <li>Pulsions : Éros (vie) vs Thanatos (mort/destruction)</li>
+            <li>Notions : inconscient, conscience, désir, bonheur, religion</li>
+          </ul>
+          <div class="formula philo">Textes clés : L'interprétation des rêves, Malaise dans la civilisation, Le Moi et le Ça</div>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Sartre (1905–1980) <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Existentialisme</strong> : « L'existence précède l'essence » — on se définit par ses actes</li>
+            <li>Liberté absolue et responsabilité totale : mauvaise foi = se mentir sur sa liberté</li>
+            <li>Autrui : « L'enfer, c'est les autres » — le regard d'autrui m'objectifie</li>
+            <li>Engagement : l'intellectuel doit prendre parti (littérature engagée)</li>
+            <li>Notions : liberté, conscience, inconscient (critique Freud), existence</li>
+          </ul>
+          <div class="formula philo">Textes clés : L'Être et le Néant, L'existentialisme est un humanisme, Huis Clos</div>
+        </div>
+      </div>
+
+    </div><!-- /philo-auteurs -->
+
+    <!-- MÉTHODES PHILO -->
+    <div class="tab-pane" id="philo-methodes">
+
+      <div class="methode-box">
+        <h4>📝 La dissertation philosophique — structure</h4>
+        <ol>
+          <li><strong>Introduction</strong> : accroche → définir les termes du sujet → problématiser → annoncer le plan</li>
+          <li><strong>Développement</strong> (3 parties) : thèse → antithèse → synthèse (ou dépassement)</li>
+          <li><strong>Conclusion</strong> : bilan du parcours → réponse à la question → ouverture</li>
+        </ol>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Comment problématiser un sujet <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>1. Définir les termes</strong> : plusieurs sens possibles, tensions entre eux</li>
+            <li><strong>2. Repérer les présupposés</strong> : ce que le sujet suppose implicitement</li>
+            <li><strong>3. Identifier la contradiction</strong> : deux réponses raisonnables en apparence opposées</li>
+            <li><strong>4. Formuler la problématique</strong> : une question qui montre pourquoi le sujet n'est pas évident</li>
+          </ul>
+          <p><em>Exemple :</em> « Peut-on se mentir à soi-même ? » → peut-on à la fois savoir quelque chose et ne pas le savoir ? (tension entre savoir et ignorer)</p>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Comment construire un plan dialectique <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="formula philo">Thèse → Antithèse → Synthèse (dépassement)</div>
+          <ul>
+            <li><strong>Thèse</strong> : répondre « oui » à la question (ou défendre la position la plus attendue)</li>
+            <li><strong>Antithèse</strong> : montrer les limites de la thèse, défendre la position inverse</li>
+            <li><strong>Synthèse</strong> : dépasser l'opposition, nuancer, proposer une réponse plus fine</li>
+            <li>Chaque partie : idée directrice → argument → exemple → analyse de l'exemple</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">L'explication de texte — méthode <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <div class="methode-box" style="margin-top:.5rem">
+            <h4>Structure de l'explication</h4>
+            <ol>
+              <li><strong>Introduction</strong> : situer l'auteur et l'œuvre, annoncer la thèse du texte, dégager le problème</li>
+              <li><strong>Explication linéaire</strong> : suivre le texte pas à pas, expliquer chaque argument, concept clé, exemple</li>
+              <li><strong>Discussion</strong> : portée du texte, limites, mise en perspective avec d'autres auteurs</li>
+              <li><strong>Conclusion</strong> : synthèse de la thèse et de sa justification</li>
+            </ol>
+          </div>
+          <ul>
+            <li>Ne pas paraphraser : expliquer, c'est reformuler et justifier</li>
+            <li>Identifier les connecteurs logiques : « donc », « or », « cependant », « en effet »</li>
+            <li>Relier chaque idée à la thèse centrale du texte</li>
+            <li>Citer précisément les termes du texte entre guillemets</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Mobiliser un auteur dans une copie <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li><strong>Nommer</strong> l'auteur et situer brièvement (« Pour Kant, dans la Critique… »)</li>
+            <li><strong>Exposer</strong> la thèse de l'auteur en rapport avec votre argument</li>
+            <li><strong>Analyser</strong> : montrer en quoi ça appuie votre démonstration</li>
+            <li><strong>Ne pas se contenter</strong> d'une citation isolée — l'analyser et l'intégrer</li>
+            <li>Varier les auteurs : ne pas rester sur un seul tout au long de la copie</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fiche">
+        <div class="fiche-header" onclick="toggleFiche(this)">Erreurs classiques à éviter <span class="chev">▼</span></div>
+        <div class="fiche-body">
+          <ul>
+            <li>❌ <strong>Paraphrase</strong> : répéter le sujet sans analyser</li>
+            <li>❌ <strong>Hors-sujet</strong> : traiter une notion sans la relier au sujet posé</li>
+            <li>❌ <strong>Exemple non analysé</strong> : l'exemple illustre mais ne démontre pas seul</li>
+            <li>❌ <strong>Absence de problématique</strong> : un plan sans tension n'est pas philosophique</li>
+            <li>❌ <strong>Conclusion bâclée</strong> : elle doit répondre à la question posée</li>
+            <li>✅ Toujours expliquer <em>pourquoi</em>, pas seulement <em>quoi</em></li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /philo-methodes -->
+
+  </div>
+</div><!-- /page-philo -->
+
+<!-- ══════════ BANQUE QCM ══════════ -->
+<script>
+var QCM = {
+
+math: [
+  {q:"Dérivée de f(x) = 5x³ − 3x + 2 ?", opts:["15x² − 3","5x² − 3","15x³ − 3","5x² − 3x"], ans:0, exp:"(5x³)' = 15x², (−3x)' = −3, (2)' = 0 → f'(x) = 15x² − 3."},
+  {q:"∫₀³ 2x dx = ?", opts:["9","6","18","3"], ans:0, exp:"[x²]₀³ = 9 − 0 = 9."},
+  {q:"Suite géométrique : u₀ = 2, q = 3. Valeur de u₄ ?", opts:["162","54","81","486"], ans:0, exp:"u₄ = u₀ × q⁴ = 2 × 81 = 162."},
+  {q:"E(X) pour X ~ B(20 ; 0,3) ?", opts:["6","0,3","14","9"], ans:0, exp:"E(X) = np = 20 × 0,3 = 6."},
+  {q:"La dérivée de ln(3x) est :", opts:["1/x","3/x","ln(3)/x","1/(3x)"], ans:0, exp:"ln(3x) = ln3 + lnx → dérivée = 1/x."},
+  {q:"Que vaut e^(iπ) ?", opts:["−1","1","i","0"], ans:0, exp:"Formule d'Euler : e^(iπ) = cosπ + i sinπ = −1."},
+  {q:"Si u⃗·v⃗ = 0, alors u⃗ et v⃗ sont :", opts:["Orthogonaux","Colinéaires","Égaux","Opposés"], ans:0, exp:"Produit scalaire nul → cosθ = 0 → θ = 90° : vecteurs orthogonaux."},
+  {q:"La suite uₙ₊₁ = 0,5uₙ avec u₀ = 10 converge vers :", opts:["0","10","5","∞"], ans:0, exp:"Suite géométrique de raison |q|=0,5 < 1 → uₙ → 0."},
+  {q:"Valeur de ∫ e^(2x) dx ?", opts:["e^(2x)/2 + C","2e^(2x) + C","e^(2x) + C","e^x/2 + C"], ans:0, exp:"∫ e^(ax)dx = e^(ax)/a + C. Ici a=2 → e^(2x)/2 + C."},
+  {q:"La dérivée de f(x) = x·e^x est :", opts:["(x+1)e^x","xe^x","e^x","(x−1)e^x"], ans:0, exp:"(uv)' = u'v+uv'. u=x u'=1, v=eˣ v'=eˣ → eˣ + xeˣ = (x+1)eˣ."},
+  {q:"lim(x→+∞) (e^x / x²) = ?", opts:["+∞","1","0","2"], ans:0, exp:"Croissances comparées : eˣ domine toute puissance de x en +∞."},
+  {q:"Dans B(n,p), la variance est :", opts:["np(1−p)","np","n²p","√(np)"], ans:0, exp:"V(X) = np(1−p). σ = √(np(1−p))."},
+  {q:"Équation de la tangente à f(x)=x² en x=3 ?", opts:["y = 6x − 9","y = 9x − 3","y = 6x + 3","y = 3x − 9"], ans:0, exp:"f(3)=9, f'(3)=6. Tangente : y = 9+6(x−3) = 6x−9."},
+  {q:"Solution de y' + y = 0 avec y(0) = 4 ?", opts:["y = 4e^(−t)","y = 4e^t","y = e^(−4t)","y = 4"], ans:0, exp:"y = Ke^(−t), y(0) = K = 4 → y = 4e^(−t)."},
+  {q:"arg(z) = π/2 signifie que z est :", opts:["Imaginaire pur positif","Réel positif","Réel négatif","Imaginaire pur négatif"], ans:0, exp:"z = r·e^(iπ/2) = ri, r > 0 → imaginaire pur positif."},
+  {q:"Somme u₀=1, q=2, 4 termes (u₀ à u₃) ?", opts:["15","16","31","7"], ans:0, exp:"S = (1−2⁴)/(1−2) = −15/(−1) = 15."},
+  {q:"La dérivée de cos²(x) est :", opts:["−sin(2x)","2cos(x)","sin²(x)","−2sin(x)"], ans:0, exp:"f(x)=(cosx)². f'=2cosx×(−sinx)=−2cosxsinx=−sin(2x)."},
+  {q:"Marge d'erreur IC 95% : p̂=0,4, n=400 ≈ ?", opts:["0,048","0,024","0,04","0,02"], ans:0, exp:"1,96√(0,4×0,6/400) = 1,96×0,0245 ≈ 0,048."},
+  {q:"Vecteur normal de la droite x + 2y − 4 = 0 :", opts:["(1 ; 2)","(2 ; 1)","(1 ; −2)","(−1 ; 2)"], ans:0, exp:"Droite ax+by+c=0 → vecteur normal (a;b) = (1;2)."},
+  {q:"∫₁² ln(x) dx = ?", opts:["2ln2−1","ln2","1","2ln2"], ans:0, exp:"IPP : [x lnx]₁² − ∫₁² 1dx = 2ln2 − 1."},
+  {q:"det([[2,3],[1,4]]) = ?", opts:["5","11","8","−5"], ans:0, exp:"det = 2×4 − 3×1 = 5."},
+  {q:"f(x) = x³−3x admet un maximum local en :", opts:["x = −1","x = 1","x = 0","x = 3"], ans:0, exp:"f'=3x²−3=0→x=±1. f''=6x, f''(−1)=−6 < 0 → max en x=−1."},
+  {q:"Solution de y'' + 4y = 0 ?", opts:["A cos(2t) + B sin(2t)","Ae^(2t)","A cos(4t)","Ae^(−4t)"], ans:0, exp:"y''+ω₀²y=0 avec ω₀=2. Solution : Acos(2t)+Bsin(2t)."},
+  {q:"Si z = 1 + i√3, l'argument de z est :", opts:["π/3","π/4","π/6","2π/3"], ans:0, exp:"|z|=2, cosθ=1/2, sinθ=√3/2 → θ=π/3."},
+  {q:"Racines de z² + 1 = 0 ?", opts:["i et −i","Aucune","1 seule","4 racines"], ans:0, exp:"z²=−1 → z=±i. Tout polynôme de degré 2 a 2 racines complexes."},
+  {q:"lim(x→0) sin(x)/x = ?", opts:["1","0","∞","−1"], ans:0, exp:"Forme 0/0, règle de l'Hôpital : lim cosx/1 = 1."},
+  {q:"Si E(X)=3 et E(X²)=13, alors V(X) = ?", opts:["4","10","9","16"], ans:0, exp:"V(X) = E(X²)−[E(X)]² = 13−9 = 4."},
+  {q:"Point fixe de uₙ₊₁ = 0,4uₙ + 6 :", opts:["10","6","15","4"], ans:0, exp:"l = 0,4l+6 → 0,6l=6 → l=10."},
+  {q:"Dérivée de f(x) = e^(sin x) :", opts:["cos(x)·e^(sin x)","sin(x)·e^(cos x)","e^(cos x)","−sin(x)·e^(sin x)"], ans:0, exp:"(eᵘ)' = u'eᵘ, u=sinx, u'=cosx → cosx·e^(sinx)."},
+  {q:"P(A∩B)=0,12, P(B)=0,4. P(A|B) = ?", opts:["0,3","0,48","0,08","1,2"], ans:0, exp:"P(A|B) = P(A∩B)/P(B) = 0,12/0,4 = 0,3."},
+],
+
+phys: [
+  {q:"Un objet m=2 kg subit F=10 N. Son accélération est :", opts:["5 m/s²","20 m/s²","0,2 m/s²","12 m/s²"], ans:0, exp:"a = F/m = 10/2 = 5 m/s² (2e loi de Newton)."},
+  {q:"Valeur efficace d'un signal sinusoïdal d'amplitude 20 V :", opts:["14,1 V","20 V","10 V","28,3 V"], ans:0, exp:"U_eff = U_max/√2 = 20/1,414 ≈ 14,1 V."},
+  {q:"pH de HCl à 0,001 mol/L :", opts:["3","11","1","6"], ans:0, exp:"HCl acide fort → [H₃O⁺]=10⁻³ → pH=3."},
+  {q:"τ d'un circuit RC : R=5kΩ, C=20µF :", opts:["0,1 s","100 s","0,04 s","25 s"], ans:0, exp:"τ = RC = 5000×20×10⁻⁶ = 0,1 s."},
+  {q:"t½ d'un noyau si λ=0,0693 s⁻¹ :", opts:["10 s","1 s","100 s","0,1 s"], ans:0, exp:"t½ = ln2/λ = 0,693/0,0693 = 10 s."},
+  {q:"Ec d'un objet m=3 kg à v=4 m/s :", opts:["24 J","48 J","12 J","6 J"], ans:0, exp:"Ec = ½mv² = ½×3×16 = 24 J."},
+  {q:"Période d'un pendule l=1 m (g=9,81 m/s²) :", opts:["2,0 s","1,0 s","3,14 s","0,5 s"], ans:0, exp:"T = 2π√(1/9,81) ≈ 2,0 s."},
+  {q:"Snell : eau(n=1,33)→air(n=1), i₁=30°. i₂ ≈ ?", opts:["41,7°","22,4°","30°","90°"], ans:0, exp:"sin i₂ = 1,33×sin30° = 0,665 → i₂ ≈ 41,7°."},
+  {q:"PV=nRT : T=300K, n=1mol, V=25L. P ≈ ?", opts:["≈100 kPa","25 kPa","300 kPa","8,31 kPa"], ans:0, exp:"P = nRT/V = 1×8,314×300/0,025 ≈ 100 kPa."},
+  {q:"Énergie d'un photon λ=500nm :", opts:["3,98×10⁻¹⁹ J","6,63×10⁻¹⁹ J","1,99×10⁻¹⁹ J","5×10⁻¹⁹ J"], ans:0, exp:"E = hc/λ = 6,626×10⁻³⁴×3×10⁸/500×10⁻⁹ ≈ 3,98×10⁻¹⁹ J."},
+  {q:"Travail du poids m=5 kg tombant h=3 m (g=10) :", opts:["150 J","50 J","15 J","300 J"], ans:0, exp:"W = mgh = 5×10×3 = 150 J."},
+  {q:"Fréquence de coupure RC : R=10kΩ, C=1nF :", opts:["15,9 kHz","10 kHz","1,59 MHz","100 Hz"], ans:0, exp:"fc = 1/(2πRC) = 1/(2π×10⁴×10⁻⁹) ≈ 15,9 kHz."},
+  {q:"ω₀ du circuit RLC : L=0,1H, C=10µF ?", opts:["1000 rad/s","100 rad/s","316 rad/s","10000 rad/s"], ans:0, exp:"ω₀ = 1/√(LC) = 1/√(10⁻⁶) = 1000 rad/s."},
+  {q:"Concentration double → vitesse quadruple. L'ordre est :", opts:["2","1","0","3"], ans:0, exp:"v=k[A]ⁿ, [A]×2 → v×4 = 2ⁿ → n=2."},
+  {q:"Lancé horizontal v₀=10 m/s, h=20 m. Durée (g=10) :", opts:["2 s","4 s","1 s","√2 s"], ans:0, exp:"h=½gt² → t=√(2h/g)=√4=2 s."},
+  {q:"Portée horizontale de l'objet précédent :", opts:["20 m","40 m","10 m","200 m"], ans:0, exp:"x = v₀×t = 10×2 = 20 m."},
+  {q:"Si T augmente, k (Arrhenius) :", opts:["Augmente exponentiellement","Diminue","Reste constant","Augmente linéairement"], ans:0, exp:"k=A·e^(−Ea/RT) : T↑ → exposant moins négatif → k↑ exponentiellement."},
+  {q:"pH tampon [HA]=0,1M, [A⁻]=0,1M, pKa=5 :", opts:["5","7","4","6"], ans:0, exp:"pH = pKa + log([A⁻]/[HA]) = 5 + log(1) = 5."},
+  {q:"Angle critique verre(n=1,5)→air(n=1) :", opts:["≈41,8°","≈30°","≈45°","≈60°"], ans:0, exp:"sin i_c = 1/1,5 → i_c ≈ 41,8°."},
+  {q:"Énergie condensateur C=100µF chargé à U=50V :", opts:["0,125 J","0,25 J","2,5 J","5 J"], ans:0, exp:"E = ½CU² = ½×10⁻⁴×2500 = 0,125 J."},
+  {q:"Neutrons dans ₂₆⁵⁶Fe ?", opts:["30","26","56","28"], ans:0, exp:"N = A−Z = 56−26 = 30 neutrons."},
+  {q:"P triple, V constant → T est multipliée par :", opts:["3","1/3","9","√3"], ans:0, exp:"PV=nRT, V cst → P/T=cste → T₂ = 3T₁."},
+  {q:"u_C(0) dans un circuit RC en charge (condensateur déchargé) :", opts:["0 V","E","E/2","E/e"], ans:0, exp:"À t=0, condensateur déchargé : u_C(0)=0. Il se charge vers E."},
+  {q:"L'estérification est :", opts:["Lente, limitée et athermique","Rapide et totale","Instantanée","Totale en milieu basique"], ans:0, exp:"Estérification : lente, limitée (équilibre), athermique. La saponification est totale."},
+  {q:"ω₀ d'un ressort k=400N/m, m=100g :", opts:["63,2 rad/s","2 rad/s","20 rad/s","200 rad/s"], ans:0, exp:"ω₀ = √(k/m) = √(400/0,1) = √4000 ≈ 63,2 rad/s."},
+  {q:"Carbone-14 (t½=5730 ans). Après 11460 ans, il reste :", opts:["25% de N₀","50% de N₀","12,5% de N₀","75% de N₀"], ans:0, exp:"11460 = 2 demi-vies → N₀/4 = 25%."},
+  {q:"Énergie de liaison par nucléon d'un noyau stable ≈ :", opts:["~8 MeV","~8 eV","~8 keV","~8 GeV"], ans:0, exp:"De l'ordre de 8 MeV/nucléon pour les noyaux stables (Fe : 8,8 MeV)."},
+  {q:"Lors d'une désintégration β⁻, un neutron devient :", opts:["Un proton + e⁻ + antineutrino","Un proton seul","Une particule α","Un proton + positon"], ans:0, exp:"β⁻ : n→p+e⁻+ν̄ₑ. Z augmente de 1, A reste constant."},
+  {q:"[HA]₀ d'un acide fort à pH=4 :", opts:["10⁻⁴ mol/L","4 mol/L","10⁴ mol/L","0,4 mol/L"], ans:0, exp:"Acide fort totalement dissocié : [H₃O⁺]=[HA]₀=10⁻⁴ mol/L."},
+  {q:"Rendement d'une machine thermique de Carnot (T_chaud=600K, T_froid=300K) :", opts:["50%","25%","75%","100%"], ans:0, exp:"η_Carnot = 1 − T_f/T_c = 1 − 300/600 = 0,5 = 50%."},
+],
+
+philo: [
+  {q:"Quel philosophe est l'auteur du cogito « Je pense, donc je suis » ?", opts:["Descartes","Platon","Kant","Hegel"], ans:0, exp:"Descartes formule le cogito dans les Méditations métaphysiques : c'est la première certitude indubitable après le doute méthodique."},
+  {q:"Selon Sartre, quelle est la thèse centrale de l'existentialisme ?", opts:["L'existence précède l'essence","L'essence précède l'existence","L'existence est déterminée","La liberté est une illusion"], ans:0, exp:"Pour Sartre, l'homme n'a pas de nature prédéterminée : il se définit par ses actes. Contrairement à l'objet (la coupe a une essence avant d'être fabriquée), l'homme existe d'abord."},
+  {q:"Pour Freud, le « Ça » désigne :", opts:["Le réservoir des pulsions inconscientes","La conscience morale","Le médiateur entre inconscient et réalité","La raison"], ans:0, exp:"Dans la deuxième topique de Freud, le Ça est le réservoir des pulsions (Éros et Thanatos), gouverné par le principe de plaisir, entièrement inconscient."},
+  {q:"L'impératif catégorique de Kant dit :", opts:["Agis comme si ta maxime devait devenir loi universelle","Fais ce qui te rend heureux","Obéis à l'État","Aime ton prochain"], ans:0, exp:"L'impératif catégorique (inconditionnnel) : « Agis uniquement d'après la maxime grâce à laquelle tu peux vouloir en même temps qu'elle devienne une loi universelle. »"},
+  {q:"Selon Spinoza, les hommes se croient libres parce qu'ils :", opts:["Ignorent les causes qui les déterminent","Ont une âme immortelle","Suivent la raison","Choisissent vraiment"], ans:0, exp:"Spinoza dans l'Éthique : les hommes ont conscience de leurs désirs mais ignorent les causes qui les déterminent — c'est pourquoi ils s'illusionnent sur leur liberté."},
+  {q:"Quelle notion Épicure classe-t-il parmi les désirs « vains » ?", opts:["La gloire et la richesse","Manger à sa faim","Dormir","Se protéger du froid"], ans:0, exp:"Épicure distingue : désirs naturels et nécessaires (nourriture, abri), naturels non nécessaires (mets raffinés), et vains (gloire, immortalité) — ces derniers ne peuvent être satisfaits."},
+  {q:"Pour Hobbes, sans État, la vie humaine serait :", opts:["Solitaire, misérable et courte","Libre et heureuse","Harmonieuse","Sage et vertueuse"], ans:0, exp:"Dans Le Léviathan, Hobbes décrit l'état de nature comme une guerre de tous contre tous : la vie y est « solitaire, misérable, dangereuse, bestiale et courte »."},
+  {q:"L'allégorie de la caverne est une métaphore de :", opts:["L'éducation philosophique","La mort","Le plaisir","La politique"], ans:0, exp:"Dans La République, Platon décrit des prisonniers enchaînés dans une caverne, ne voyant que des ombres. Le philosophe, en sortant, accède à la lumière du Bien — c'est une métaphore de l'éducation."},
+  {q:"Le « conatus » chez Spinoza désigne :", opts:["La tendance de chaque être à persévérer dans son être","La raison universelle","Le désir sexuel","L'instinct de mort"], ans:0, exp:"Le conatus est l'effort fondamental de tout être pour persévérer dans son existence. Spinoza en fait l'essence même du désir humain."},
+  {q:"Nietzsche annonce la « mort de Dieu » pour signifier :", opts:["L'effondrement des valeurs absolues en Occident","La disparition de la croyance religieuse","La victoire de la science","La fin de la philosophie"], ans:0, exp:"La mort de Dieu (Ainsi parlait Zarathoustra) signifie que les valeurs absolues (le Vrai, le Bien, l'Au-delà) ont perdu leur fondement — c'est le diagnostic du nihilisme."},
+  {q:"Qu'est-ce que la « mauvaise foi » pour Sartre ?", opts:["Se mentir sur sa propre liberté","Mentir aux autres","Croire en Dieu","Être pessimiste"], ans:0, exp:"La mauvaise foi est le fait de se mentir à soi-même sur sa liberté : on prétend être déterminé (« je n'ai pas le choix ») pour fuir la responsabilité que la liberté implique."},
+  {q:"Selon Kant, l'homme doit être traité comme :", opts:["Une fin en soi, jamais seulement comme un moyen","Un moyen au service de l'État","Un être dominé par ses passions","Un animal rationnel perfectible"], ans:0, exp:"Deuxième formulation de l'impératif catégorique : « Agis de telle sorte que tu traites l'humanité, dans ta personne et dans celle d'autrui, toujours comme une fin, jamais seulement comme un moyen. »"},
+  {q:"Pour Rousseau, le contrat social vise à :", opts:["Concilier liberté individuelle et volonté générale","Soumettre l'individu à l'État","Imposer la loi du plus fort","Supprimer les inégalités naturelles"], ans:0, exp:"Le contrat social de Rousseau établit que chaque individu aliène sa liberté naturelle à la communauté, mais en échange il obéit à la volonté générale (qui est la sienne). Liberté civile."},
+  {q:"Qu'est-ce que le « voile d'ignorance » chez Rawls ?", opts:["Un dispositif pour définir des principes de justice impartiaux","Un mécanisme de censure","Une métaphore de l'inconscient","Un outil de la rhétorique"], ans:0, exp:"Rawls demande d'imaginer qu'on choisisse les règles de justice sans savoir quelle place on occuperait dans la société. Ce « voile d'ignorance » garantit l'impartialité."},
+  {q:"Chez Heidegger, « l'être-pour-la-mort » signifie :", opts:["La mort révèle notre finitude et notre liberté","La mort est à craindre","La mort est une illusion","La mort nous libère définitivement"], ans:0, exp:"Pour Heidegger dans Être et Temps, la mort n'est pas un événement futur mais une structure de notre existence : c'est parce que nous sommes mortels que nous vivons de façon authentique, dans le souci et le projet."},
+  {q:"Marx considère la religion comme :", opts:["L'opium du peuple, consolation face aux souffrances réelles","La source de la morale","Un progrès de la raison","La base de la société juste"], ans:0, exp:"Marx : « La religion est l'opium du peuple. » Elle console les opprimés de leurs souffrances réelles au lieu de les inciter à transformer les conditions matérielles de leur existence."},
+  {q:"Selon Wittgenstein, « les limites de mon langage » signifient :", opts:["Les limites de mon monde","Les limites de ma mémoire","Les limites de ma liberté","Les limites de mon corps"], ans:0, exp:"Dans le Tractatus logico-philosophicus : « Les limites de mon langage signifient les limites de mon propre monde. » Ce qu'on ne peut pas dire, on doit le taire."},
+  {q:"L'ataraxie chez Épicure correspond à :", opts:["L'absence de troubles de l'âme","Le plaisir maximum du corps","La vertu stoïcienne","La contemplation divine"], ans:0, exp:"L'ataraxie est la tranquillité de l'âme, absence de troubles et d'angoisses. Combinée à l'aponie (absence de douleurs physiques), elle constitue pour Épicure le bonheur véritable."},
+  {q:"Pour Platon, la justice dans la cité est :", opts:["Chaque partie faisant ce qui lui revient (harmonie)","L'égalité absolue entre citoyens","La force du plus puissant","Le respect des lois écrites"], ans:0, exp:"Dans La République, la justice est l'harmonie des trois classes (philosophes-rois, guerriers, artisans) et des trois parties de l'âme (raison, thumos, appétits), chacune faisant ce qui lui est propre."},
+  {q:"Quel est l'objet de la généalogie de la morale chez Nietzsche ?", opts:["Critiquer l'origine des valeurs morales","Défendre la morale chrétienne","Fonder une éthique universelle","Analyser les lois de l'État"], ans:0, exp:"Nietzsche dans La Généalogie de la morale analyse comment les valeurs (bien, mal, culpabilité) ont été inventées historiquement, notamment par la « morale des esclaves » (faibles) contre celle des « maîtres » (forts)."},
+  {q:"La notion de « performatif » chez Austin désigne :", opts:["Un énoncé qui fait ce qu'il dit","Un énoncé vrai ou faux","Un discours rhétorique","Un acte de violence verbale"], ans:0, exp:"Austin (Quand dire c'est faire) : les énoncés performatifs ne décrivent pas une action, ils l'accomplissent (promettre, déclarer, jurer). Ex : « Je vous déclare mariés » est un acte, pas une description."},
+  {q:"Le stoïcien Épictète enseigne que :", opts:["Seul ce qui dépend de nous mérite attention","Il faut fuir la souffrance à tout prix","Le plaisir est le souverain bien","La raison est impuissante face aux passions"], ans:0, exp:"Épictète dans le Manuel : distinguer ce qui dépend de nous (jugements, désirs) et ce qui n'en dépend pas (corps, réputation, richesse). Le bonheur = maîtriser ce qui dépend de nous."},
+  {q:"Pour Bergson, la durée est :", opts:["Le temps vécu intérieurement, distinct du temps mesuré","Le temps physique objectif","La durée de vie biologique","La mémoire collective"], ans:0, exp:"Bergson critique le temps spatialisé (mesuré par l'horloge) et défend la durée réelle : flux continu, hétérogène, saisi par l'intuition et non par l'intelligence."},
+  {q:"Hannah Arendt distingue trois activités humaines fondamentales. Lesquelles ?", opts:["Labor, work, action","Penser, vouloir, juger","Désirer, agir, contempler","Corps, âme, esprit"], ans:0, exp:"Dans La Condition de l'homme moderne, Arendt distingue : le labor (nécessité biologique), le work (fabriquer des œuvres durables), et l'action (espace politique de la parole entre hommes libres)."},
+  {q:"Selon Camus, l'absurde naît de :", opts:["La confrontation entre la soif humaine de sens et le silence du monde","La mort inévitable","L'existence de Dieu","Le déterminisme scientifique"], ans:0, exp:"Dans Le Mythe de Sisyphe, Camus : l'absurde est le résultat du choc entre l'aspiration humaine à la clarté et le mutisme déraisonnable du monde. Il faut l'affronter sans fuir (ni suicide, ni espoir religieux)."},
+  {q:"Pour Aristote, la vertu est :", opts:["Le juste milieu entre deux excès","L'obéissance à la loi divine","La réalisation du plaisir","La conformité à la raison pure"], ans:0, exp:"Aristote dans l'Éthique à Nicomaque : la vertu éthique est un état de caractère qui consiste à choisir le juste milieu (mesotes) entre un excès et un manque. Ex : le courage entre la lâcheté et la témérité."},
+  {q:"Heidegger critique la technique moderne parce qu'elle :", opts:["Réduit la nature à un fonds disponible","Est trop primitive","Détruira la planète","Supprime la religion"], ans:0, exp:"Heidegger dans La Question de la technique : la technique moderne (Gestell = arraisonnement) dévoile le monde de façon particulière, en réduisant tout étant (y compris l'homme) à une ressource exploitable."},
+  {q:"La « volonté générale » de Rousseau est :", opts:["Ce que veut le peuple pour l'intérêt commun","La somme des volontés particulières","La volonté du souverain","La loi naturelle"], ans:0, exp:"La volonté générale (Du Contrat Social) n'est pas la volonté de tous (somme d'intérêts particuliers) mais ce que le peuple veut en tant qu'il vise le bien commun. Elle est toujours droite."},
+  {q:"Chez Platon, les Idées sont :", opts:["Des réalités éternelles et immuables, modèles des choses sensibles","Des opinions communes","Des constructions mentales subjectives","Des objets mathématiques"], ans:0, exp:"La théorie des Idées (ou Formes) : les Idées sont les seules vraies réalités — éternelles, immuables, accessibles à la raison. Le monde sensible n'en est qu'une imitation imparfaite."},
+  {q:"Le principe de falsifiabilité de Popper signifie qu'une théorie scientifique :", opts:["Doit pouvoir être réfutée par l'expérience","Doit être vérifiée par tous","Doit être mathematique","Doit être universellement acceptée"], ans:0, exp:"Popper : une théorie n'est scientifique que si elle est falsifiable, c'est-à-dire qu'on peut concevoir une expérience qui la réfuterait. Ce qui ne peut jamais être réfuté (astrologie, psychanalyse naïve) n'est pas scientifique."},
+  {q:"L'éthique utilitariste de John Stuart Mill consiste à :", opts:["Maximiser le bonheur du plus grand nombre","Respecter les droits absolus","Agir selon son devoir","Chercher le juste milieu"], ans:0, exp:"Mill dans L'Utilitarisme : une action est juste si elle produit la plus grande somme de bonheur pour le plus grand nombre. Le principe d'utilité comme critère moral."},
+],
+
+};
+
+var G = { math:{a:0,c:0,t:0}, phys:{a:0,c:0,t:0}, philo:{a:0,c:0,t:0} };
+
+function goHome() {
+  document.getElementById('page-home').style.display = 'block';
+  document.querySelectorAll('.subject-page').forEach(function(p){ p.classList.remove('active'); });
+}
+function openSubject(subj) {
+  document.getElementById('page-home').style.display = 'none';
+  document.querySelectorAll('.subject-page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('page-' + subj).classList.add('active');
+  window.scrollTo(0,0);
+}
+function switchTab(subj, tab) {
+  var page = document.getElementById('page-' + subj);
+  page.querySelectorAll('.sp-tab').forEach(function(t){ t.classList.remove('active'); });
+  page.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.remove('active'); });
+  page.querySelectorAll('.sp-tab').forEach(function(t){
+    if (t.getAttribute('onclick') === "switchTab('" + subj + "','" + tab + "')") t.classList.add('active');
+  });
+  var tp = document.getElementById(subj + '-' + tab);
+  if (tp) tp.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function toggleFiche(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length-1; i > 0; i--) {
+    var j = Math.floor(Math.random()*(i+1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function startQCM(subj) {
+  var nbEl = document.getElementById(subj+'-nb');
+  var nb = Math.min(parseInt(nbEl.value), QCM[subj].length);
+  var pool = shuffle(QCM[subj]).slice(0, nb);
+  G[subj] = {a:0, c:0, t:pool.length};
+  updateScore(subj);
+  var strip = document.getElementById(subj+'-score-strip');
+  strip.style.display = 'flex';
+  var container = document.getElementById(subj+'-questions');
+  container.innerHTML = '';
+  pool.forEach(function(q, qi) {
+    var origIdxs = q.opts.map(function(_,i){ return i; });
+    var shuffled = shuffle(origIdxs);
+    var newAns = shuffled.indexOf(q.ans);
+    var optsHtml = shuffled.map(function(oi, ni) {
+      return '<button class="opt" data-ni="'+ni+'" onclick="answer(this,\''+subj+'\','+newAns+','+pool.length+','+qi+')">'+q.opts[oi]+'</button>';
+    }).join('');
+    var div = document.createElement('div');
+    div.className = 'qitem';
+    div.innerHTML = '<div class="qitem-q"><span class="qnum">Q'+(qi+1)+'.</span>'+q.q+'</div>'+
+      '<div class="opts" data-exp="'+encodeURIComponent(q.exp)+'">'+optsHtml+'</div>'+
+      '<div class="fb" id="fb-'+subj+'-'+qi+'"></div>';
+    container.appendChild(div);
+  });
+  container.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function answer(btn, subj, correctNI, total, qi) {
+  var opts = btn.parentElement;
+  if (opts.querySelector('.opt[disabled]')) return;
+  var chosen = parseInt(btn.getAttribute('data-ni'));
+  var ok = chosen === correctNI;
+  var exp = decodeURIComponent(opts.getAttribute('data-exp'));
+  opts.querySelectorAll('.opt').forEach(function(o) {
+    o.disabled = true;
+    var ni = parseInt(o.getAttribute('data-ni'));
+    if (ni === correctNI) o.classList.add('correct');
+    else if (o === btn && !ok) o.classList.add('wrong');
+  });
+  var fb = document.getElementById('fb-'+subj+'-'+qi);
+  fb.style.display = 'block';
+  fb.className = 'fb '+(ok?'ok':'ko');
+  fb.textContent = (ok?'✓ Correct ! ':'✗ Incorrect. ')+exp;
+  G[subj].a++;
+  if (ok) G[subj].c++;
+  updateScore(subj);
+  updateTopbar();
+}
+
+function updateScore(subj) {
+  var bigEl = document.getElementById(subj+'-score-big');
+  var pctEl = document.getElementById(subj+'-pct');
+  if (bigEl) bigEl.textContent = G[subj].c+'/'+G[subj].t;
+  var pct = G[subj].a > 0 ? Math.round(G[subj].c/G[subj].a*100) : 0;
+  if (pctEl) pctEl.textContent = pct;
+}
+function updateTopbar() {
+  var total = G.math.a + G.phys.a + G.philo.a;
+  document.getElementById('topbar-prog').textContent = total+' réponse'+(total>1?'s':'');
+  document.getElementById('stat-rep').textContent = total;
+}
+</script>
+
+</body>
+</html>

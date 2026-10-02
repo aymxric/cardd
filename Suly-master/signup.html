@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription — Suly</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+  <section class="auth-section" style="display:block;">
+    <a href="index.html" style="text-decoration:none; font-size:1.2rem;">← Retour à l’accueil</a>
+    <h2>Créer un compte</h2>
+    <p id="message"></p>
+    <form id="signup-form">
+      <input type="email" id="signup-email" placeholder="Email" required />
+      <input type="password" id="signup-password" placeholder="Mot de passe" required />
+      <button type="submit">S'inscrire</button>
+    </form>
+    <p>Déjà inscrit ? <a href="login.html">Se connecter</a></p>
+  </section>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3Lu02nQvQurAU0aBkhv9vQ239xs9xyH0",
+      authDomain: "suly-a48f2.firebaseapp.com",
+      projectId: "suly-a48f2",
+      storageBucket: "suly-a48f2.appspot.com",
+      messagingSenderId: "747436486919",
+      appId: "1:747436486919:web:15993be447249965aa95a2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const signupForm = document.getElementById('signup-form');
+    const message = document.getElementById('message');
+
+    signupForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          message.style.color = 'green';
+          message.textContent = "Compte créé avec succès. Redirection...";
+          setTimeout(() => window.location.href = "index.html", 1500);
+        })
+        .catch(error => {
+          message.style.color = 'red';
+          message.textContent = "Erreur : " + error.message;
+        });
+    });
+  </script>
+</body>
+</html>

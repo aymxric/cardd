@@ -1,0 +1,167 @@
+/* GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background-color: #f4f4f4;
+}
+
+.card{
+    height: 560px;
+    width: 100%;
+    max-width: 450px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card_banner{
+    width: 100%;
+    height: 200px;
+    background-color: rgb(94 104 105);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 25px 25px 0 0;
+}
+
+.card_profile{
+    border: 4px solid rgb(77, 84, 85);
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    position: absolute;
+    top: 23%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    background-color: white;
+    z-index: 1;
+}
+
+.img_profile{
+    width: 200px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.card_text{
+    margin-top: 240px;
+    text-align: center;
+    font-weight: 500px;
+}
+
+.card_text h1{
+    margin: 8px 0;
+}
+
+.card_text p{
+    font-size: 22px;
+    margin: 0 0 30px 0;
+}
+
+/* ICONS */
+.card_icons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.card_icons_facebook, .card_icons_instagram,
+.card_icons_twitter, .card_icons_youtube{
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    padding: 13px;
+}
+
+i{
+    width: 100%;
+    padding-top: 5px;
+    text-align: center;
+}
+
+.card_icons_facebook{
+    background-color: #4267b2;
+}
+
+.card_icons_twitter{
+    background-color: #1daaf2;
+}
+
+.card_icons_instagram{
+    background-color: #e1306c;
+}
+
+.card_icons_youtube{
+    background-color: #ff0000;
+}
+
+/* BUTTON */
+.card_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+
+.card_button button{
+    color: white;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 12px 30px;
+    background-color: #4070f4;
+    border-radius: 25px;
+    border: 1px solid transparent;
+}
+
+.card_button button:hover{
+    cursor: pointer;
+    background-color: #0e4bf1;
+    transition: 0.5s;
+}
+
+/*  INFOS */
+.card_infos{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.card_infos_content{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    gap: 7px;
+    margin: 0;
+    font-size: 21px;
+    border-right: 3px solid #e7e7e7;
+    height: 25px;
+    padding: 0 30px;
+}
+
+.card_infos_content:last-child{
+    border-right: none;
+}
+

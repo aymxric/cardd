@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="card.css">
+
+    <title>Carte de profil</title>
+</head>
+
+<body>
+
+    <section class="card">
+
+        <!-- Bannière -->
+        <div class="card_banner"></div>
+
+        <!-- Photo de profil -->
+        <div class="card_profile">
+            <img src="Profil1.jpg" alt="Ma photo" class="img_profile">
+        </div>
+
+        <!-- Nom et description -->
+        <div class="card_text">
+            <h1>Aymeric Corbeau</h1>
+            <p>Recherche d'alternance</p>
+        </div>
+
+        <!-- Réseaux sociaux -->
+        <div class="card_icons">
+
+            <!-- GitHub -->
+            <div class="card_icons_github">
+                <a href="https://github.com/aymxric" target="_blank">
+                    <i class="bx bxl-github"></i>
+                </a>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="card_icons_linkedin">
+                <a href="https://www.linkedin.com/in/aymeric-c-245461306/" target="_blank">
+                    <i class="bx bxl-linkedin"></i>
+                </a>
+            </div>
+
+            <!-- TikTok -->
+           
+
+            <!-- CV -->
+            <div class="card_icons_cv">
+                <a href="CV.pdf" target="_blank">
+                    <i class="bx bx-file"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Boutons de contact -->
+        <div class="card_button">
+
+            <a href="mailto:aymericcorbeau@gmail.com">
+                <button>Adresse Mail</button>
+            </a>
+
+            <a href="tel:0648100448">
+                <button>Numero de Telephone</button>
+            </a>
+
+        </div>
+
+        <!-- Menu projets -->
+        <div class="projects-menu">
+
+            <button class="projects-title">
+                <span>Mes projets</span>
+                <span class="arrow">▼</span>
+            </button>
+
+            <div class="projects-list">
+                <a href="C:\Users\ordi2317662\Documents\card\REVISION\site revision.html" target="_blank">
+                    Site revision STI2D
+                </a>
+
+                <a href="C:\Users\ordi2317662\Documents\card\Suly-master\index.html" target="_blank">
+                    Projet site marque de vetement
+                </a>
+
+                <a href="C:\Users\ordi2317662\Documents\card\test" target="_blank">
+                    Site CV
+                </a>
+                
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- JavaScript du menu -->
+    <script>
+
+        const projectsTitle = document.querySelector('.projects-title');
+        const projectsList = document.querySelector('.projects-list');
+        const projectsIcon = projectsTitle.querySelector('.arrow');
+
+        projectsTitle.addEventListener('click', () => {
+
+            if (projectsList.style.display === 'block') {
+
+                projectsList.style.display = 'none';
+                projectsIcon.style.transform = 'rotate(0deg)';
+
+            } else {
+
+                projectsList.style.display = 'block';
+                projectsIcon.style.transform = 'rotate(180deg)';
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+/* ---- BASE ---- */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  background-color: #fff;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---- LOADER ---- */
+#loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loader img {
+  width: 150px;
+  height: auto;
+}
+
+/* ---- HEADER ---- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.logo img {
+  height: 50px; /* ajuste la taille du logo */
+  width: auto;
+  display: block;
+}
+
+/* ---- NAVIGATION ---- */
+nav ul.main-nav {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+nav ul.main-nav li {
+  position: relative;
+}
+
+nav ul.main-nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* Empêche le texte de couper */
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+nav ul.main-nav a:hover {
+  color: #999;
+}
+
+/* ---- DROPDOWN MENU ---- */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  font-weight: normal;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* ---- HERO SECTION ---- */
+.hero {
+  margin-top: 70px; /* pour laisser la place au header fixe */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.graffiti-title {
+  max-width: 90%;
+  height: auto;
+  animation: fadeZoom 1.8s ease-out;
+  filter: drop-shadow(3px 3px 0 #000) drop-shadow(6px 6px 10px rgba(0,0,0,0.6));
+  transform: rotate(-1deg);
+}
+
+@keyframes fadeZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.9) rotate(-1deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-1deg);
+  }
+}
+
+/* ---- FOOTER ---- */
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: auto;
+}
+
+footer a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 0.3rem;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---- PRODUITS (images) ---- */
+.produit img {
+  max-width: 100%;       /* limite la largeur à celle du conteneur */
+  max-height: 300px;     /* limite la hauteur max à 300px */
+  height: auto;          /* conserve les proportions */
+  display: block;
+  margin: 0 auto;        /* centre l’image horizontalement */
+  object-fit: contain;   /* évite la déformation */
+}
+/* Exemple pour les petits écrans (smartphones) */
+@media (max-width: 600px) {
+  nav ul.main-nav {
+    flex-direction: column;  /* menu vertical */
+    gap: 1rem;
+  }
+
+  .produit img {
+    width: 100%;  /* images prennent toute la largeur possible */
+    height: auto;
+  }
+
+  header {
+    padding: 0 1rem;
+  }
+}
+/* Style simple pour les formulaires */
+    .auth-section {
+      max-width: 400px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f0f0f0;
+      border-radius: 8px;
+      font-family: 'Bebas Neue', sans-serif;
+      display: none; /* Caché par défaut */
+      position: relative;
+    }
+    .auth-section h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .auth-section form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .auth-section input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .auth-section button {
+      padding: 0.7rem;
+      font-size: 1rem;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #message {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    #user-info {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+    #logout-btn {
+      display: block;
+      margin: 0 auto 2rem;
+      padding: 0.7rem 1.5rem;
+      background: #c33;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+    /* Boutons dans le header */
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .auth-buttons button {
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    .auth-buttons button:hover {
+      background-color: #444;
+    }
+    /* Bouton fermer */
+    #close-auth {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #c33;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 28px;
+      text-align: center;
+      padding: 0;
+    }
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.auth-buttons .auth-link {
+  background-color: #000;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Bebas Neue', sans-serif;
+  transition: background-color 0.3s;
+}
+
+.auth-buttons .auth-link:hover {
+  background-color: #444;
+}
+/* Par défaut pour mobile */
+.auth-section {
+  padding: 1rem;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive pour écran moyen à grand (tablette, PC) */
+@media (min-width: 600px) {
+  .auth-section {
+    max-width: 400px;
+    margin: 2rem auto;
+    border: 1px solid #ddd;
+    padding: 2rem;
+    border-radius: 10px;
+    background: #f9f9f9;
+  }
+}
+
+/* Champs et boutons responsive */
+.auth-section input,
+.auth-section button {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+

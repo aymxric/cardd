@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Suly - Sweats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="icon" href="images/logo_suly.png" type="image/png" />
+  <style>
+    /* Grille des produits */
+    .grid-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 80px; /* pour laisser la place au header fixe */
+      padding: 0 1rem;
+    }
+
+    .produit {
+      width: 200px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .produit img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Effet au survol */
+    .produit:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
+
+    .prix {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo_suly.png" alt="Logo Sully" style="height: 40px;" />
+      </a>
+    </div>
+    <nav>
+      <ul class="main-nav">
+        <li class="dropdown">
+          <a href="#">Shop
+            <svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" width="10" height="7" style="margin-left: 5px; vertical-align: middle; transform: rotate(180deg); fill: currentColor;">
+              <polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon>
+            </svg>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="teeshirt.html">T-Shirts</a></li>
+            <li><a href="sweat.html">Sweat</a></li>
+            <li><a href="pantalons.html">Pantalons</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Lookbook</a></li>
+        <li><a href="#">Nouveautés</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="grid-section">
+      <!-- Exemple produit sweat -->
+      <div class="produit">
+        <img src="images/sweat.jpeg" alt="Sweat Sully" />
+        <p class="prix">€40</p>
+      </div>
+      <!-- Tu peux rajouter d'autres produits ici si besoin -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Suly — Tous droits réservés</p>
+    <p>
+      <a href="https://www.instagram.com/suly.clo" target="_blank" rel="noopener noreferrer">Instagram</a> |
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a> |
+      <a href="mailto:contact@sully.fr">Contact</a>
+    </p>
+  </footer>
+</body>
+</html>
