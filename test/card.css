@@ -1,0 +1,219 @@
+@import url(https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap);
+
+* {
+    font-family: "Lora", sans-serif;
+}
+
+body {
+    background: #e3f2fd;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* CARTE */
+
+.card {
+    width: 450px;
+    max-width: 450px;
+    height: auto;
+
+    background-color: #fff;
+    position: relative;
+
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+    box-sizing: border-box;
+}
+
+/* BANNIÈRE */
+
+.card_banner {
+    width: 100%;
+    height: 200px;
+    background-color: rgb(73, 77, 77);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 25px 25px 0 0;
+}
+
+/* PHOTO */
+
+.card_profile {
+    border: 4px solid rgb(35, 36, 36);
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    background-color: rgb(104, 85, 85);
+    z-index: 1;
+}
+
+.img_profile {
+    width: 180px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* TEXTE */
+
+.card_text {
+    margin-top: 230px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.card_text h1 {
+    margin-bottom: 8px;
+}
+
+.card_text p {
+    font-size: 22px;
+    margin: 0 0 30px 0;
+}
+
+/* RÉSEAUX / ICÔNES */
+
+.card_icons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.card_icons_github,
+.card_icons_linkedin,
+.card_icons_cv {
+    width: 30px;
+    height: 30px;
+    padding: 13px;
+    border-radius: 50%;
+    background-color: rgb(103, 105, 105);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.card_icons a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.card_icons i {
+    color: white !important;
+    font-size: 20px;
+    width: auto;
+    padding-top: 0;
+    text-align: center;
+}
+
+/* BOUTONS MAIL / TÉLÉPHONE */
+
+.card_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.card_button button {
+    color: rgb(255, 252, 252);
+    font-size: 17px;
+    font-weight: 400;
+    padding: 12px 30px;
+    background-color: rgb(103, 105, 105);
+    border-radius: 25px;
+    border: 1px solid transparent;
+}
+
+.card_button button:hover {
+    cursor: pointer;
+    background-color: rgb(103, 105, 105);
+    transition: 0.5s;
+}
+
+/* MENU MES PROJETS */
+
+.projects-menu {
+    width: 100%;
+    margin-top: 25px;
+    box-sizing: border-box;
+}
+
+.projects-title {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 15px;
+    background: rgb(103, 105, 105);
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+}
+
+/* FLÈCHE */
+
+.projects-title .arrow {
+    font-size: 18px;
+    color: white;
+    transition: transform 0.3s;
+}
+
+/* LISTE */
+
+.projects-list {
+    width: 100%;
+    display: none;
+    margin-top: 8px;
+    box-sizing: border-box;
+}
+
+/* PROJETS */
+
+.projects-list a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 18px;
+    margin-bottom: 7px;
+
+    border-radius: 12px;
+    background: rgb(103, 105, 105);
+
+    color: white;
+    text-decoration: none;
+}
+
+.projects-list a:last-child {
+    margin-bottom: 0;
+}
+
+.projects-list a:hover {
+    background: rgb(120, 122, 122);
+}
